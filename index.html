@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chakraview Data & AI | Production-Grade Data Engineering & AI Readiness</title>
+  <meta name="description" content="Principal Data Engineering & AI Readiness Consultancy. Turning fragmented data into reliable, contract-governed pipelines and lakehouse foundations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #111827;
+      --bg-card: #161f33;
+      --bg-card-hover: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+      --border-highlight: rgba(56, 189, 248, 0.45);
+      --max-w: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.10), transparent 35%);
+    }
+
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #fff, var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.35rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+      color: #090d16;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--accent-blue);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 6rem 0 5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent-blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 940px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent-blue), #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p.lead {
+      font-size: 1.18rem;
+      color: var(--text-secondary);
+      max-width: 780px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .tech-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .tech-badge {
+      padding: 0.3rem 0.7rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+    }
+
+    /* SECTIONS GENERAL */
+    section {
+      padding: 5.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* GRID SYSTEM */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.85rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .icon-danger {
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .icon-guarantee {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .pillar-quote {
+      display: block;
+      margin-top: 0.9rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border-subtle);
+      font-size: 0.82rem;
+      color: var(--accent-blue);
+    }
+
+    /* PRICING / PACKAGES */
+    .tier-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .tier-card.featured {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.1);
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--accent-blue);
+      color: #090d16;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .tier-type {
+      font-size: 0.8rem;
+      color: var(--accent-blue);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .tier-best-for {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0.85rem 0 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .deliverables-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .deliverables-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .deliverables-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-emerald);
+      font-weight: 800;
+    }
+
+    /* ARCHITECTURE DUAL TRACK */
+    .arch-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 2.25rem;
+    }
+
+    .pipeline-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 1.25rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      font-size: 0.88rem;
+    }
+
+    .node {
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      background: var(--bg-card);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .arrow {
+      color: var(--text-muted);
+      font-weight: bold;
+    }
+
+    /* INTAKE FORM */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.45rem;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    textarea.form-control {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <span class="brand-name">Chakraview Data &amp; AI</span>
+        <span class="brand-sub">A Chakraview Technologies LLC Company</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#problem">The AI Data Gap</a>
+        <a href="#guarantees">Delivery Model</a>
+        <a href="#packages">Packages</a>
+        <a href="#architecture">Architecture</a>
+        <a href="/ai-dev-model/workflow/">AI Dev Model Docs ↗</a>
+        <a href="#book" class="btn btn-primary">Book a Data Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SECTION 1: HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow mono">Principal Data Engineering &amp; AI Readiness Consultancy</div>
+      <h1>
+        Production-Grade Data Engineering &amp; AI Readiness—<span>Turning Fragmented Data into Reliable, Governed Pipelines.</span>
+      </h1>
+      <p class="lead">
+        Most AI initiatives don't fail because of the model—they fail because the underlying data is siloed, untrusted, and ungoverned. We build contract-first data platforms and real-time lakehouse foundations that make moving businesses ready for AI at scale.
+      </p>
+      <div class="hero-ctas">
+        <a href="#packages" class="btn btn-primary">Book an AI Data-Readiness Audit →</a>
+        <a href="#architecture" class="btn btn-secondary">Explore Reference Architectures &amp; Delivery Model</a>
+      </div>
+      <div class="tech-strip mono">
+        <span>CORE STACK:</span>
+        <span class="tech-badge">Data Contracts</span>
+        <span class="tech-badge">Apache Iceberg</span>
+        <span class="tech-badge">Debezium CDC</span>
+        <span class="tech-badge">Apache Kafka &amp; Flink</span>
+        <span class="tech-badge">DuckDB / AWS Athena</span>
+        <span class="tech-badge">Medallion Lakehouse</span>
+        <span class="tech-badge">RAG &amp; AI Context Pipelines</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE AI DATA GAP -->
+  <section id="problem">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow mono">The Bottleneck</div>
+        <h2>Why 80% of SMB AI Initiatives Stall Before Production</h2>
+        <p>Jumping straight from raw operational databases to LLM copilots or automated workflows creates expensive hallucinations and security leaks. Before your models can reason, your data layer must be engineered for trust.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <span class="card-icon icon-danger mono">Risk 01 // Schema Drift</span>
+          <h3>Dirty &amp; Drifting Schemas</h3>
+          <p>Unannounced upstream application changes silently break downstream executive dashboards and corrupt AI retrieval context windows with malformed records.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-danger mono">Risk 02 // Data Silos</span>
+          <h3>Fragmented SaaS &amp; Operational Traps</h3>
+          <p>Critical business context is trapped across isolated Postgres databases, payment systems, and CRMs with brittle 24-hour batch reporting lags.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-danger mono">Risk 03 // Governance &amp; PII</span>
+          <h3>Ungoverned PII &amp; Compliance Exposure</h3>
+          <p>Feeding raw operational tables into embeddings or LLM prompts without automated Silver/Gold PII masking exposes sensitive customer and financial data.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-danger mono">Risk 04 // Cloud Spend</span>
+          <h3>Brittle, High-Cost ETL Plumbing</h3>
+          <p>Unmonitored spaghetti scripts and oversized proprietary data warehouses drain engineering hours and inflate monthly cloud compute bills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CHAKRAVIEW DELIVERY MODEL GUARANTEES -->
+  <section id="guarantees">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow mono">Our Differentiator</div>
+        <h2>Engineered with Discipline: The Chakraview Delivery Model</h2>
+        <p>We don't "vibe-code" data pipelines. Every engagement is governed by our open-source <strong>Human-AI Development Model</strong>, translating Principal-level architectural rigor into four ironclad client guarantees.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">Guarantee 01 // Reliability</span>
+          <h3>Zero Silent Pipeline Failures</h3>
+          <p>Every data source is locked behind explicit schema and semantic data contracts at the ingestion boundary. Malformed records are quarantined automatically before reaching dashboards or AI agents.</p>
+          <span class="pillar-quote mono">Pillar: "Contracts Before Code"</span>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">Guarantee 02 // Velocity</span>
+          <h3>Principal Architecture, 40% Faster Delivery</h3>
+          <p>Principal-level architectural design paired with deterministic, agent-accelerated implementation cuts delivery timelines and consulting overhead without sacrificing production rigor.</p>
+          <span class="pillar-quote mono">Pillar: "Humans Define Correctness; Agents Ensure Consistency"</span>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">Guarantee 03 // Observability</span>
+          <h3>Verified Cost, Latency &amp; Quality Benchmarks</h3>
+          <p>No pipeline is handed over without automated data quality assertions, end-to-end latency SLAs, and cloud-compute cost profiling proven in staging.</p>
+          <span class="pillar-quote mono">Pillar: "Measure Before Claim"</span>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">Guarantee 04 // Governance</span>
+          <h3>Ironclad Scope &amp; Change Control</h3>
+          <p>Every architectural change enters through a traceable specification gate—eliminating shadow pipelines, unapproved schema mutations, and consulting scope creep.</p>
+          <span class="pillar-quote mono">Pillar: "Intent Enters Through a Defined Gate"</span>
+        </div>
+      </div>
+      <div style="margin-top: 2rem;">
+        <a href="/ai-dev-model/workflow/" class="btn btn-secondary mono">Inspect the Full Chakraview AI Dev Workflow Specification →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: PRODUCTIZED SERVICE PACKAGES -->
+  <section id="packages">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow mono">Service Tiers</div>
+        <h2>Transparent Ways to Engage</h2>
+        <p>Whether you need a rapid diagnostic to unblock your AI roadmap, a turnkey modern lakehouse foundation, or Principal-level contract execution, we offer structured engagements with zero billing surprises.</p>
+      </div>
+      <div class="grid-3">
+        <!-- Tier 1 -->
+        <div class="card tier-card">
+          <div>
+            <div class="tier-type mono">Tier 01 // Fixed-Fee Sprint</div>
+            <h3>2-Week AI &amp; Data Readiness Diagnostic</h3>
+            <p class="tier-best-for">Best for SMBs preparing to deploy AI agents, RAG pipelines, or executive analytics who need a clear architectural blueprint and risk audit.</p>
+            <ul class="deliverables-list">
+              <li>Full audit of transactional DBs, SaaS silos &amp; schema health</li>
+              <li>PII exposure &amp; AI data governance risk assessment</li>
+              <li>Comprehensive <strong>SMB Data Readiness Scorecard</strong></li>
+              <li>Phased lakehouse architecture &amp; cloud cost roadmap</li>
+            </ul>
+          </div>
+          <a href="#book" onclick="selectPackage('Tier 1: 2-Week AI & Data Readiness Diagnostic')" class="btn btn-secondary" style="width:100%;">Request Diagnostic Scope</a>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="card tier-card featured">
+          <div class="tier-badge mono">Most Popular for SMBs</div>
+          <div>
+            <div class="tier-type mono">Tier 02 // Milestone-Based Project</div>
+            <h3>Modern Lakehouse &amp; AI Pipeline Foundation</h3>
+            <p class="tier-best-for">Best for growing businesses ready to replace brittle scripts with a governed, low-ops Medallion Lakehouse that powers analytics and AI.</p>
+            <ul class="deliverables-list">
+              <li>Automated CDC or batch ingestion with strict Data Contracts</li>
+              <li>Bronze / Silver / Gold Apache Iceberg Medallion Lakehouse</li>
+              <li>Automated PII redaction &amp; curated AI/RAG context tables</li>
+              <li>Low-ops query layer (DuckDB / Athena) &amp; full team handoff</li>
+            </ul>
+          </div>
+          <a href="#book" onclick="selectPackage('Tier 2: Modern Lakehouse & AI Pipeline Foundation')" class="btn btn-primary" style="width:100%;">Discuss a Foundation Project</a>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="card tier-card">
+          <div>
+            <div class="tier-type mono">Tier 03 // Retainer or Contract</div>
+            <h3>Fractional Principal Data Engineer</h3>
+            <p class="tier-best-for">Best for engineering leaders needing hands-on Principal leadership for high-throughput streaming, CDC, or critical platform contracts.</p>
+            <ul class="deliverables-list">
+              <li>Hands-on architecture &amp; pipeline execution (Kafka, Flink, Iceberg)</li>
+              <li>Enterprise data contract governance &amp; CI/CD automation</li>
+              <li>Engineering team mentorship, PR reviews &amp; architecture standards</li>
+              <li>Ongoing warehouse &amp; compute cost optimization</li>
+            </ul>
+          </div>
+          <a href="#book" onclick="selectPackage('Tier 3: Fractional Principal / Contract Engineering')" class="btn btn-secondary" style="width:100%;">Inquire About Availability</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: REFERENCE ARCHITECTURE -->
+  <section id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow mono">Open-Source Proof</div>
+        <h2>Proven Architecture—Scaled for Enterprise, Right-Sized for SMBs</h2>
+        <p>Explore our production reference platform. We apply the exact same Contract-First Medallion principles across two deployment tracks tailored to your operational footprint.</p>
+      </div>
+
+      <div class="arch-box">
+        <div class="mono" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.6rem;">REFERENCE PIPELINE TOPOLOGY:</div>
+        <div class="pipeline-flow mono">
+          <span class="node">Operational DBs / SaaS</span>
+          <span class="arrow">→</span>
+          <span class="node">Debezium CDC + Data Contracts</span>
+          <span class="arrow">→</span>
+          <span class="node">Kafka / Event Stream</span>
+          <span class="arrow">→</span>
+          <span class="node">Apache Flink</span>
+          <span class="arrow">→</span>
+          <span class="node">Apache Iceberg (Bronze/Silver/Gold)</span>
+          <span class="arrow">→</span>
+          <span class="node">DuckDB / Athena / AI Context</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" style="background: var(--bg-primary);">
+            <span class="card-icon icon-guarantee mono">Track A // SMB Right-Sized Footprint (&lt;$300/mo Cloud Compute)</span>
+            <h3>Serverless Medallion Lakehouse</h3>
+            <p>Don't have a dedicated 10-person DevOps team? We deploy our Contract-First Medallion architecture on object storage using <strong>Apache Iceberg + DuckDB / AWS Athena</strong>. You get enterprise schema enforcement, automated PII masking, and clean AI-ready Gold tables with near-zero infrastructure overhead.</p>
+          </div>
+          <div class="card" style="background: var(--bg-primary);">
+            <span class="card-icon icon-guarantee mono">Track B // Enterprise &amp; High-Scale Contract Track</span>
+            <h3>Real-Time Kappa Streaming Platform</h3>
+            <p>Need sub-second operational pipelines? Full streaming topology featuring <strong>Debezium CDC, Apache Kafka, stateful Apache Flink processing, and ACID-compliant Iceberg tables</strong>—engineered for strict schema evolution, dead-letter quarantining, and high-throughput analytical parity.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+          <a href="https://github.com/naren-chakraview" target="_blank" rel="noopener" class="btn btn-secondary mono">View Reference Repositories on GitHub ↗</a>
+          <a href="https://github.com/naren-chakraview/chakraview-ai-dev-model" target="_blank" rel="noopener" class="btn btn-secondary mono">Explore chakraview-ai-dev-model Repo ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: BOOKING & INTAKE -->
+  <section id="book">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div>
+          <div class="eyebrow mono">Start the Conversation</div>
+          <h2 style="font-size: 2.1rem; font-weight: 800; margin-bottom: 1rem;">Ready to Make Your Data AI-Ready?</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+            Request a 25-minute introductory architecture review with Principal Architect <strong>Narendra Loganathan</strong>. No sales fluff—just a direct technical evaluation of your current data stack, bottlenecks, and AI goals.
+          </p>
+          <div class="card" style="background: var(--bg-secondary);">
+            <div class="mono" style="font-size: 0.82rem; color: var(--accent-blue); margin-bottom: 0.5rem;">WHAT HAPPENS NEXT:</div>
+            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">1. Submit your stack profile using the intake form.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">2. We review your architecture and reply within 1 business day with a calendar link.</p>
+            <p style="font-size: 0.9rem;">3. Walk away from our 25-minute call with clear next steps—whether we engage together or not.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <form id="intakeForm" onsubmit="handleIntakeSubmit(event)">
+            <div class="form-group">
+              <label for="name">Your Name &amp; Company</label>
+              <input type="text" id="name" class="form-control" placeholder="Jane Doe — Acme Corp" required />
+            </div>
+            <div class="form-group">
+              <label for="interest">Engagement Track of Interest</label>
+              <select id="interest" class="form-control">
+                <option value="Tier 1: 2-Week AI & Data Readiness Diagnostic">Tier 1: 2-Week AI &amp; Data Readiness Diagnostic (Fixed-Fee)</option>
+                <option value="Tier 2: Modern Lakehouse & AI Pipeline Foundation">Tier 2: Modern Lakehouse &amp; AI Pipeline Foundation (Project)</option>
+                <option value="Tier 3: Fractional Principal / Contract Engineering">Tier 3: Fractional Principal / Contract Data Engineering</option>
+                <option value="General Architecture Consultation">General Architecture Consultation</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="stack">1. What does your current data stack look like?</label>
+              <input type="text" id="stack" class="form-control" placeholder="e.g., Postgres, AWS, Snowflake, Stripe, HubSpot..." required />
+            </div>
+            <div class="form-group">
+              <label for="goal">2. What is your primary 90-day AI or data goal?</label>
+              <input type="text" id="goal" class="form-control" placeholder="e.g., Prepare clean data for RAG/AI agents, unify analytics, CDC streaming..." required />
+            </div>
+            <div class="form-group">
+              <label for="bottleneck">3. What is your biggest data bottleneck right now?</label>
+              <textarea id="bottleneck" class="form-control" placeholder="e.g., Schema drift breaking reports, siloed tables, high cloud costs, need Principal engineering bandwidth..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Architecture Intake &amp; Request Call →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.35rem;">Chakraview Data &amp; AI</p>
+      <p style="margin-bottom: 0.75rem;">Greater Seattle Area (Sammamish, WA) &bull; <a href="https://github.com/naren-chakraview" style="color: var(--accent-blue);">GitHub</a> &bull; <a href="/ai-dev-model/workflow/" style="color: var(--accent-blue);">AI Dev Model</a></p>
+      <p>&copy; 2026 Chakraview Technologies LLC, d/b/a Chakraview Data &amp; AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function selectPackage(pkgName) {
+      const select = document.getElementById('interest');
+      if (select) {
+        select.value = pkgName;
+      }
+    }
+
+    function handleIntakeSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const interest = document.getElementById('interest').value;
+      const stack = document.getElementById('stack').value.trim();
+      const goal = document.getElementById('goal').value.trim();
+      const bottleneck = document.getElementById('bottleneck').value.trim();
+
+      const subject = encodeURIComponent(`[Chakraview Inquiry] ${interest} — ${name}`);
+      const body = encodeURIComponent(
+`Name & Company: ${name}
+Engagement Track: ${interest}
+
+1. Current Data Stack:
+${stack}
+
+2. Primary 90-Day Goal:
+${goal}
+
+3. Biggest Data Bottleneck:
+${bottleneck}`
+      );
+
+      window.location.href = `mailto:naren@chakraview.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
+
