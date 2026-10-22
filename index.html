@@ -715,6 +715,38 @@
           </div>
         </div>
       </div>
+
+      <div style="margin-top: 2.5rem;">
+        <div class="mono" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">DEEP-DIVE REFERENCE ARCHITECTURES &amp; BLUEPRINTS:</div>
+        <div class="grid-3">
+          <div class="card tier-card">
+            <div>
+              <span class="card-icon icon-guarantee mono">Reference 01 // Contract-First Streaming</span>
+              <h3>Real-Time Data Platform</h3>
+              <p style="margin-bottom: 1.5rem;">Contract-driven Kappa streaming lakehouse (<strong>Debezium CDC → Kafka → Flink → Apache Iceberg → DuckDB</strong>). Demonstrates schema enforcement at ingestion, dead-letter quarantining, and sub-second Gold-layer analytical queries.</p>
+            </div>
+            <a href="/realtime-data-platform/" class="btn btn-secondary mono" style="width: 100%;">Explore Architecture Docs →</a>
+          </div>
+
+          <div class="card tier-card">
+            <div>
+              <span class="card-icon icon-guarantee mono">Reference 02 // Federated Governance</span>
+              <h3>Fintech Data Mesh &amp; Zero-Copy Lakehouse</h3>
+              <p style="margin-bottom: 1.5rem;">Decentralized domain ownership on Apache Iceberg with federated compliance controls (<strong>PCI-DSS, AML, SOX</strong>), automated PII masking, and cross-domain zero-copy analytics.</p>
+            </div>
+            <a href="/fintech-data-mesh/" class="btn btn-secondary mono" style="width: 100%;">Explore Data Mesh Docs →</a>
+          </div>
+
+          <div class="card tier-card">
+            <div>
+              <span class="card-icon icon-guarantee mono">Reference 03 // 9 Patterns × 22 Variants</span>
+              <h3>Data Engineering Patterns Catalog</h3>
+              <p style="margin-bottom: 1.5rem;">Production-informed reference blueprints and decision matrices covering <strong>9 core data engineering patterns across 22 idiomatic stack variants</strong>—with trade-off criteria for choosing the right architecture.</p>
+            </div>
+            <a href="/data-engineering-patterns/" class="btn btn-secondary mono" style="width: 100%;">Browse Patterns &amp; Matrix →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -774,7 +806,14 @@
   <footer>
     <div class="container">
       <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.35rem;">Chakraview Data &amp; AI</p>
-      <p style="margin-bottom: 0.75rem;">Greater Seattle Area (Sammamish, WA) &bull; <a href="https://github.com/naren-chakraview" style="color: var(--accent-blue);">GitHub</a> &bull; <a href="/ai-dev-model/" style="color: var(--accent-blue);">AI Dev Model</a></p>
+      <p style="margin-bottom: 0.5rem;">Greater Seattle Area (Sammamish, WA)</p>
+      <p style="margin-bottom: 0.75rem;">
+        <a href="/ai-dev-model/" style="color: var(--accent-blue);">AI Dev Model</a> &bull;
+        <a href="/realtime-data-platform/" style="color: var(--accent-blue);">Real-Time Data Platform</a> &bull;
+        <a href="/fintech-data-mesh/" style="color: var(--accent-blue);">Fintech Data Mesh</a> &bull;
+        <a href="/data-engineering-patterns/" style="color: var(--accent-blue);">Data Engineering Patterns</a> &bull;
+        <a href="https://github.com/naren-chakraview" style="color: var(--accent-blue);">GitHub</a>
+      </p>
       <p>&copy; 2026 Chakraview Technologies LLC, d/b/a Chakraview Data &amp; AI. All rights reserved.</p>
     </div>
   </footer>
