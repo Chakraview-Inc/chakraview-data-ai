@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chakraview Data & AI | SMB AI & Data Readiness Scorecard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 680px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        h1 { font-size: 1.5rem; margin-top: 0; color: var(--accent); }
+        p.subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+        .step { display: none; }
+        .step.active { display: block; }
+        .question-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; }
+        .options-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+        .option-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-card:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
+        .option-card input { margin-right: 0.75rem; accent-color: var(--accent); }
+        .btn-group { display: flex; justify-content: space-between; align-items: center; }
+        button {
+            background: var(--accent);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        button.secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+        .progress-bar {
+            width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 2rem; overflow: hidden;
+        }
+        .progress-fill { height: 100%; background: var(--accent); width: 16.6%; transition: width 0.3s ease; }
+        .results-box { text-align: center; }
+        .score-display { font-size: 3rem; font-weight: bold; color: var(--accent); margin: 1rem 0; }
+        .cta-box {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px dashed var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Chakraview Data & AI Readiness Scorecard</h1>
+    <p class="subtitle">Evaluate your data plumbing, schema stability, and AI readiness in under 2 minutes.</p>
+    
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+    <form id="auditForm">
+        <!-- Step 1 -->
+        <div class="step active" id="step-1">
+            <div class="question-title">1. Where does the majority of your core business data live and how does it move?</div>
+            <div class="options-list">
+                <label class="option-card"><input type="radio" name="q1" value="10" required> Siloed SaaS Apps & Manual CSV Exports (High Risk)</label>
+                <label class="option-card"><input type="radio" name="q1" value="20"> Monolithic Operational Database (PostgreSQL/MySQL reporting direct)</label>
+                <label class="option-card"><input type="radio" name="q1" value="30"> Scheduled ETL (Fivetran/Airbyte) to Cloud Warehouse</label>
+                <label class="option-card"><input type="radio" name="q1" value="40"> Contract-First / Real-Time Streaming & Medallion Architecture</label>
+            </div>
+            <div class="btn-group"><span></span><button type="button" onclick="nextStep(2)">Next Question &rarr;</button></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step" id="step-2">
+            <div class="question-title">2. How often do downstream dashboards or workflows break due to schema changes?</div>
+            <div class="options-list">
+                <label class="option-card"><input type="radio" name="q2" value="10" required> Constantly (Weekly firefighting and silent breaks)</label>
+                <label class="option-card"><input type="radio" name="q2" value="20"> Occasionally (Monthly surprises caught by end-users)</label>
+                <label class="option-card"><input type="radio" name="q2" value="30"> Rarely (Basic schema alerts, manual troubleshooting)</label>
+                <label class="option-card"><input type="radio" name="q2" value="40"> Never (Gated via strict ingestion data contracts)</label>
+            </div>
+            <div class="btn-group"><button type="button" class="secondary" onclick="nextStep(1)">&larr; Back</button><button type="button" onclick="nextStep(3)">Next Question &rarr;</button></div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step" id="step-3">
+            <div class="question-title">3. How are PII and sensitive records handled before exposure to internal analytics or LLMs?</div>
+            <div class="options-list">
+                <label class="option-card"><input type="radio" name="q3" value="10" required> Unrestricted / Unknown (Raw production data accessible)</label>
+                <label class="option-card"><input type="radio" name="q3" value="20"> Role-Based Access Only (Data rarely masked or redacted)</label>
+                <label class="option-card"><input type="radio" name="q3" value="30"> Basic Compliance (Meets baseline GDPR/CCPA, no automated AI redaction)</label>
+                <label class="option-card"><input type="radio" name="q3" value="40"> Zero-Trust Governance (Automated PII tokenization & lineage tracking)</label>
+            </div>
+            <div class="btn-group"><button type="button" class="secondary" onclick="nextStep(2)">&larr; Back</button><button type="button" onclick="nextStep(4)">Next Question &rarr;</button></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step" id="step-4">
+            <div class="question-title">4. What is your primary artificial intelligence or automation objective?</div>
+            <div class="options-list">
+                <label class="option-card"><input type="radio" name="q4" value="10" required> Customer-Facing RAG / Chatbot (Worried about hallucinations & data leaks)</label>
+                <label class="option-card"><input type="radio" name="q4" value="20"> Internal Operational Copilots (Support routing, internal search)</label>
+                <label class="option-card"><input type="radio" name="q4" value="30"> Predictive Analytics / Forecasting (Demand & churn models)</label>
+                <label class="option-card"><input type="radio" name="q4" value="40"> Core Data Foundation Fix (Ensuring data plumbing is solid before AI)</label>
+            </div>
+            <div class="btn-group"><button type="button" class="secondary" onclick="nextStep(3)">&larr; Back</button><button type="button" onclick="nextStep(5)">Next Question &rarr;</button></div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step" id="step-5">
+            <div class="question-title">5. Do you have visibility and spending controls over your cloud data compute?</div>
+            <div class="options-list">
+                <label class="option-card"><input type="radio" name="q5" value="10" required> The "Black Box" Bill (Unpredictable spikes, no cost attribution)</label>
+                <label class="option-card"><input type="radio" name="q5" value="20"> Basic Invoices (Reactive monitoring, occasional overages)</label>
+                <label class="option-card"><input type="radio" name="q5" value="30"> Monitored Workloads (Tracked costs, occasional unoptimized queries)</label>
+                <label class="option-card"><input type="radio" name="q5" value="40"> Cost-Optimized Serverless / Low-Ops Footprint (&lt;$300/mo)</label>
+            </div>
+            <div class="btn-group"><button type="button" class="secondary" onclick="nextStep(4)">&larr; Back</button><button type="button" onclick="nextStep(6)">Next Question &rarr;</button></div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step" id="step-6">
+            <div class="question-title">6. How do you measure correctness and reliability before pipeline handoff?</div>
+            <div class="options-list">
+                <label class="option-card"><input type="radio" name="q6" value="10" required> Hope and Pray (Relying on customer complaints)</label>
+                <label class="option-card"><input type="radio" name="q6" value="20"> Manual SQL Spot-Checks by Engineers</label>
+                <label class="option-card"><input type="radio" name="q6" value="30"> Automated Basic Assertions (dbt tests)</label>
+                <label class="option-card"><input type="radio" name="q6" value="40"> Measure Before Claim (Strict automated quality gates & benchmarks)</label>
+            </div>
+            <div class="btn-group"><button type="button" class="secondary" onclick="nextStep(5)">&larr; Back</button><button type="button" onclick="calculateScore()">View Scorecard &rarr;</button></div>
+        </div>
+    </form>
+
+    <!-- Results View -->
+    <div class="step" id="results-step">
+        <div class="results-box">
+            <h2>Your AI & Data Readiness Index</h2>
+            <div class="score-display" id="finalScore">0 / 240</div>
+            <p id="scoreCategory" style="font-weight: 600; font-size: 1.2rem;"></p>
+            <p id="scoreDescription" style="color: var(--text-muted); margin-top: 1rem;"></p>
+
+            <div class="cta-box">
+                <h3 style="margin-top:0; color: var(--accent);">Unlock Your Remediation Roadmap</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 1rem;">Your score indicates critical architectural bottlenecks that will cause downstream AI pipeline failures or compute cost overruns. Skip the trial-and-error.</p>
+                <a href="mailto:contact@chakraview.com?subject=Booking:%202-Week%20AI%20%26%20Data%20Readiness%20Diagnostic" style="display:inline-block; background:var(--accent); color:var(--bg-color); padding:0.75rem 1.5rem; text-decoration:none; font-weight:bold; border-radius:6px;">Book the 2-Week AI & Data Readiness Diagnostic ($4,500)</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function nextStep(stepNum) {
+        // Validate current step
+        const currentActive = document.querySelector('.step.active');
+        const radios = currentActive.querySelectorAll('input[type="radio"]');
+        if (radios.length > 0) {
+            let answered = Array.from(radios).some(r => r.checked);
+            if (!answered) {
+                alert('Please select an option to continue.');
+                return;
+            }
+        }
+
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step-' + stepNum).classList.add('active');
+        document.getElementById('progress').style.width = (stepNum / 6) * 100 + '%';
+    }
+
+    function calculateScore() {
+        const form = document.getElementById('auditForm');
+        const formData = new FormData(form);
+        let totalScore = 0;
+        for (let value of formData.values()) {
+            totalScore += parseInt(value);
+        }
+
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        document.getElementById('results-step').classList.add('active');
+        document.getElementById('progress').style.width = '100%';
+        document.getElementById('finalScore').innerText = totalScore + ' / 240';
+
+        let category = '';
+        let desc = '';
+
+        if (totalScore <= 100) {
+            category = '🚨 High Risk: Pipeline & AI Blocked';
+            desc = 'Your data infrastructure is highly vulnerable to schema drift, unmanaged PII, and silent failures. Deploying LLMs or RAG applications in this state will result in severe hallucinations and security exposure.';
+        } else if (totalScore <= 170) {
+            category = '⚠️ Moderate: Foundation-First Required';
+            desc = 'You have functional data storage, but lack the contract-first rigor and automated governance needed to scale AI reliably without unpredictable cloud compute spikes.';
+        } else {
+            category = '✅ Production-Ready Lakehouse';
+            desc = 'Exceptional data maturity. You operate with contract-first discipline, robust governance, and predictable cost controls. You are fully primed for advanced AI integration.';
+        }
+
+        document.getElementById('scoreCategory').innerText = category;
+        document.getElementById('scoreDescription').innerText = desc;
+    }
+</script>
+
+</body>
+</html>
+
