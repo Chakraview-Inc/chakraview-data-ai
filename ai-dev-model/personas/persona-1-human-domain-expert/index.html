@@ -380,6 +380,28 @@
   
   
   
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../adrs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ADRs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../../case-studies/" class="md-tabs__link">
         
@@ -689,6 +711,17 @@
     <span class="md-ellipsis">
       
         Guardrails
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contract-challenge-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contract Challenge Review
       
     </span>
   </a>
@@ -1129,6 +1162,117 @@
   
   
   
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../adrs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADRs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADRs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adrs/adr-ccr-threshold/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CCR Threshold Rule
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--accepted"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../case-studies/" class="md-nav__link">
         
@@ -1222,6 +1366,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#contract-challenge-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contract Challenge Review
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1261,6 +1416,13 @@
 <p>This persona performs the final review gate after each agent phase. The review question is always the same: <em>does this artifact correctly express the contract?</em> Not: <em>is this good code?</em></p>
 <h2 id="guardrails">Guardrails<a class="headerlink" href="#guardrails" title="Permanent link">&para;</a></h2>
 <p><code>CODEOWNERS</code> maps <code>contracts/</code> to <code>@{project}/senior-engineers</code>. No agent-initiated PR may modify a contract file.</p>
+<h2 id="contract-challenge-review">Contract Challenge Review<a class="headerlink" href="#contract-challenge-review" title="Permanent link">&para;</a></h2>
+<p>Review incoming Contract Challenge Reports (CCRs) in <code>ai-agents/reviews/ccr-*.md</code>. Route each to the relevant product or business owner with the cost signal. Record the outcome directly in the CCR file:</p>
+<ul>
+<li><strong>Relax</strong>: amend the contract file in <code>contracts/</code> and re-enter Phase 0 for the affected contract.</li>
+<li><strong>Hold</strong>: write an ADR in <code>docs/adrs/</code> documenting why the contract stands at this cost. Resume the originating phase once the ADR is written and reviewed.</li>
+</ul>
+<p>Neither outcome is undocumented. Every CCR resolution produces a written artifact.</p>
 
 
 

@@ -380,6 +380,28 @@
   
   
   
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../adrs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ADRs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../../case-studies/" class="md-tabs__link">
         
@@ -1118,6 +1140,117 @@
   
   
   
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../adrs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADRs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADRs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adrs/adr-ccr-threshold/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CCR Threshold Rule
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--accepted"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../case-studies/" class="md-nav__link">
         
@@ -1318,8 +1451,12 @@
 
     I["IMPLEMENTATION LAYER&lt;br/&gt;&lt;br/&gt;services/&amp;lt;service&amp;gt;/src/domain/&lt;br/&gt;services/&amp;lt;service&amp;gt;/src/domain/events/&lt;br/&gt;services/&amp;lt;service&amp;gt;/src/infrastructure/OtelInstrumentation&lt;br/&gt;&lt;br/&gt;observability/slos/&amp;lt;service&amp;gt;-slo.yaml&lt;br/&gt;observability/alerts/&amp;lt;service&amp;gt;-burnrate.yaml"]
 
+    CCR["CONTRACT CHALLENGE REPORT&lt;br/&gt;ai-agents/reviews/ccr-{service}-{date}.md&lt;br/&gt;&lt;br/&gt;Any agent surfaces: contract too costly to honor&lt;br/&gt;Human Expert routes to product owner&lt;br/&gt;RELAX → amend contract → re-enter&lt;br/&gt;HOLD → write ADR → resume"]
+
     H -- "consumed by" --&gt; A
-    A -- "produces" --&gt; I</code></pre>
+    A -- "produces" --&gt; I
+    A -. "CCR: contract challenge (Loop C)" .-&gt; CCR
+    CCR -. "RELAX: amended contract" .-&gt; H</code></pre>
 
 
 
