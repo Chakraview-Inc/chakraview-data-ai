@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agents in Production: A Plain-Language Guide for IT Leaders | Chakraview Data &amp; AI</title>
+  <meta name="description" content="Agents can book the meeting, file the ticket, and move the money. That is the promise and the problem. Here is what it takes to run one safely, in terms that do not assume you have lived inside the hype." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #111827;
+      --bg-card: #161f33;
+      --bg-card-hover: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+      --border-highlight: rgba(56, 189, 248, 0.45);
+      --max-w: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.10), transparent 35%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #fff, var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+      color: #090d16;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--accent-blue);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .article-shell {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-blue);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .article-header h1 {
+      font-size: clamp(2rem, 4vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .article-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .article-content {
+      font-size: 1.08rem;
+      color: #e2e8f0;
+      line-height: 1.8;
+    }
+
+    .article-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2.75rem 0 1rem;
+      letter-spacing: -0.015em;
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2rem 0 0.75rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.35rem;
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 0 0 1.5rem 1.5rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.6rem;
+    }
+
+    .article-content strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .article-content em {
+      color: var(--text-secondary);
+    }
+
+    .article-content a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .article-content code {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .article-content pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.75rem 0;
+    }
+
+    .article-content pre code {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 0;
+      font-size: 0.88rem;
+    }
+
+    .article-content hr {
+      border: 0;
+      border-top: 1px solid var(--border-subtle);
+      margin: 2.5rem 0;
+    }
+
+    .mermaid-wrapper {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0 0.75rem;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .mermaid-wrapper pre.mermaid {
+      background: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .article-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-name">Chakraview Data &amp; AI</span>
+        <span class="brand-sub">A Chakraview Technologies LLC Company</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/#problem">The AI Data Gap</a>
+        <a href="/#guarantees">Delivery Model</a>
+        <a href="/#packages">Packages</a>
+        <a href="/#architecture">Architecture</a>
+        <a href="/articles/" class="active" style="color: var(--accent-blue); font-weight: 600;">Articles</a>
+        <a href="/ai-dev-model/">AI Dev Model Docs ↗</a>
+        <a href="/#book" class="btn btn-primary">Book a Data Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <a href="/articles/" class="back-link mono">← All Articles</a>
+    <article>
+      <div class="article-header">
+        <h1>AI Agents in Production: A Plain-Language Guide for IT Leaders</h1>
+        <p class="article-subtitle">Agents can book the meeting, file the ticket, and move the money. That is the promise and the problem. Here is what it takes to run one safely, in terms that do not assume you have lived inside the hype.</p>
+        <div class="article-meta mono">
+          <span>By Narendra Loganathan</span>
+          <span>&bull;</span>
+          <span>9 min read</span>
+          <span>&bull;</span>
+          <span>Updated 2026-10-26</span>
+        </div>
+      </div>
+            <div class="article-content">
+<p>Every vendor deck right now shows the same magic trick: you type a sentence, and software goes off and does the work. Books a meeting. Reconciles an invoice. Opens a ticket, investigates it, and closes it. The demos are real, and they are genuinely impressive. The trouble starts the day you want to put one in front of a customer, or point it at a system that can spend money or change records.</p>
+<p>This guide is for the person who has to sign off on that. It skips the hype and the deep jargon, explains the few terms you do need, and lays out the handful of things that separate a slick demo from something you can run in production without losing sleep. None of it is tied to a particular vendor. All of it comes from building and stress-testing this layer ourselves.</p>
+
+<h2>First, what an AI agent actually is</h2>
+<p>A chatbot takes a question and hands back text. You read the text and decide what to do. An <strong>agent</strong> is different in one decisive way: you give it a goal, and it takes the steps itself. It looks things up, it calls other software to get things done, it checks the result, and it decides what to do next. It keeps going until it thinks the goal is met.</p>
+<p>When people say an agent makes a <strong>"tool call,"</strong> they mean exactly this: the agent reaches out and uses one of your systems. Querying a database, sending an email, charging a card, filing a ticket. The tool call is where an agent stops being a clever writer and becomes a worker that acts on the real world.</p>
+<p>Two things make that powerful and risky at the same time. An agent <strong>acts on its own</strong>, without a human reading each step. And its behavior is <strong>not fully predictable</strong>: the same request can take a different path on different runs, and a cleverly worded input can nudge it off course. That last risk even has a name, <em>prompt injection</em>, which is just a fancy way of saying someone can smuggle instructions into the agent's input and get it to misbehave. You cannot QA an agent the way you QA a form that always does the same thing.</p>
+
+<h2>Why a working demo is not a production system</h2>
+<p>A demo shows the happy path. Production is all the unhappy paths the demo skipped. A tool times out. A model returns nonsense in a field you expected to be a number. A loop that should take three steps takes three hundred. The agent does something it was never meant to do. And afterward, nobody can say exactly what happened or why.</p>
+<p>In business terms, three things can go wrong, and all three land on your desk:</p>
+<ul>
+<li><strong>Runaway cost.</strong> Agents pay by the step. A loop with no ceiling can run up a surprising bill before anyone notices.</li>
+<li><strong>Wrong or irreversible action.</strong> A chatbot that is wrong writes a bad sentence. An agent that is wrong can send the email, issue the refund, or delete the record.</li>
+<li><strong>No audit trail.</strong> When an auditor, a regulator, or an angry customer asks "who did this, and who said it was allowed?", you need an answer that is in a record, not a reconstruction.</li>
+</ul>
+<p>The good news: none of these are new problems. They are the same disciplines that make any critical system trustworthy, applied to a stranger kind of software. There are five of them.</p>
+
+<h2>The five layers that make an agent safe to run</h2>
+<p>Think of these as five questions you should be able to answer before an agent touches anything that matters. If a vendor or an internal team cannot answer all five, the agent is a demo, not a product.</p>
+
+<h3>1. Can you see what it did?</h3>
+<p>The first requirement is a step-by-step record of every move the agent made: what it looked up, which systems it called, what each call returned, how long it took, and what it cost. In the trade this record is called a <strong>trace</strong>, and the practice of producing it is <strong>observability</strong>. Think of it as a flight recorder. Without it, you are trusting a black box, and you cannot debug, bill back, or explain a single thing after the fact. This is the floor. Nothing else on this list can be verified without it.</p>
+
+<h3>2. Did you test it before you trusted it?</h3>
+<p>You would not ship code with no tests. An agent needs the same thing: a set of known cases with known good answers, scored automatically, run before and after every change. This is usually called an <strong>evaluation</strong> or an <strong>eval</strong>. Its real job is to catch the quiet regression, the tweak that makes the agent a little worse in a way no one would notice by hand until a customer does. In our own reliability kit, this gate caught a deliberately broken agent failing nineteen of twenty-two test cases and blocked it from going out. That is the point: the test fails so the customer does not.</p>
+
+<h3>3. Are there rails around its actions?</h3>
+<p>Every action an agent takes should be wrapped in limits, the way a circuit breaker wraps a wire. The pieces are simple:</p>
+<ul>
+<li>A <strong>timeout</strong>, so a stuck tool does not hang the whole run forever.</li>
+<li>A <strong>retry</strong> for operations that are safe to repeat, so a brief network hiccup does not sink the task.</li>
+<li>A sensible <strong>stand-in</strong> when a tool is simply down, so the agent degrades gracefully instead of crashing.</li>
+<li>Hard <strong>caps on cost and on the number of steps</strong>, so a runaway loop stops itself before it runs up a bill.</li>
+</ul>
+<p>One rule here is worth putting in bold, because getting it wrong is how agents cause real damage: <strong>never automatically retry an action that moves money or changes data.</strong> If a payment call times out, you often cannot tell whether it went through. Retry it and you may pay twice. Retry only the things that are safe to repeat, like looking something up, and for anything that changes the world, try once and report the outcome as uncertain so a human or a careful check can step in. The industry word for "safe to repeat" is <em>idempotent</em>; the only thing you need to remember is which of your actions are not.</p>
+<p>These rails are not theoretical. In our testing, retries recovered all ten of ten temporary tool failures that a plain call dropped every time, and a spending cap halted a runaway loop at about five cents instead of letting it spin.</p>
+
+<h3>4. Does it have an identity and a leash it cannot loosen?</h3>
+<p>This is the layer most teams skip, and the one auditors care about most. It has three parts, and the plain-language versions are not complicated:</p>
+<ul>
+<li><strong>Its own identity.</strong> The agent gets a verified identity of its own, not a shared password copied around a codebase. You always know which agent acted.</li>
+<li><strong>A written policy it cannot edit.</strong> You spell out exactly what this agent is allowed to do: which tools, which data, which actions. That policy is signed and lives outside the agent, so the agent cannot widen its own permissions, even if it is tricked into trying. Every action is checked against it, and a "no" is final. A confused or hijacked agent can still only do what its policy already allowed.</li>
+<li><strong>A delegation trail.</strong> When one agent hands work to another, which hands it to a service, the chain of "who authorized this, acting on whose behalf" is recorded end to end. This is the thing that lets you answer the regulator's question with a record instead of a guess.</li>
+</ul>
+<p>Collectively this is called <strong>governance</strong>. It is the difference between "we think the agent stays in its lane" and "the agent cannot leave its lane, and here is the proof."</p>
+
+<div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-left: 3px solid var(--accent-blue); border-radius: 10px; padding: 1.4rem 1.6rem; margin: 2rem 0;">
+  <div class="mono" style="font-size: 0.78rem; color: var(--accent-blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem;">Plain-language glossary</div>
+  <p style="margin: 0 0 0.6rem;"><strong>Agent.</strong> Software that is given a goal and takes the steps to reach it on its own, instead of just answering a question.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Tool call.</strong> The agent using one of your systems: a database query, an email, a payment, a ticket.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Trace.</strong> The step-by-step record of a run: every action, its result, its cost, its timing.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Guardrails.</strong> The limits around each action: timeouts, retries, stand-ins, and caps on cost and steps.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Governance.</strong> The agent's verified identity, the permissions it cannot change, and the record of who authorized what.</p>
+  <p style="margin: 0;"><strong>Prompt injection.</strong> Hiding instructions in the agent's input to get it to do something it should not.</p>
+</div>
+
+<h3>5. How does it find information and coordinate its steps?</h3>
+<p>The last layer is the plumbing, and the main message about it is: <strong>keep it as simple as the job allows.</strong> Two parts matter. <em>Retrieval</em> is how the agent looks things up in your documents, and plain keyword search is often as accurate as the fancier "meaning-based" search while being far faster and far cheaper. <em>Orchestration</em> is how multiple steps or multiple agents are coordinated, and a straight-line process beats a swarm of agents for most real work. Complexity in this layer is where cost and bugs quietly accumulate. Reach for the elaborate option only when a measured need forces you to.</p>
+
+<div class="mermaid-wrapper"><pre class="mermaid">flowchart LR
+    U["User goal"] --> A["AI Agent<br/>picks the next step"]
+    A --> G{"Guardrails + policy<br/>allowed? within limits?"}
+    G -->|denied or<br/>over budget| S["Stops safely<br/>recorded and reported"]
+    G -->|allowed| T["Your systems<br/>the tools it calls"]
+    T --> A
+    A -. every step .-> O["Observability<br/>full trace: actions, cost, time"]
+    G -. every decision .-> O</pre></div>
+<p><em>Every action passes a guardrail and a policy check before it reaches your systems, and every step is written to a trace. A denial or a blown budget stops the run safely, and nothing happens off the record.</em></p>
+
+<h2>A few rules that save money and grief</h2>
+<p>Independent of which products you buy, a handful of habits do most of the work:</p>
+<ul>
+<li><strong>Start with the simplest thing that works.</strong> Plain search before semantic search, one straight process before a multi-agent design. In our tests the simple option often matched the elaborate one on accuracy at a fraction of the speed and cost.</li>
+<li><strong>Pin the settings.</strong> Language models have a creativity dial, called <em>temperature</em>. For anything you will test or depend on, set it to its most predictable setting, or you cannot reproduce a result or trust a test. In one of our runs, the only wrong answer disappeared the moment the dial was pinned.</li>
+<li><strong>Treat a "denied" as a final answer.</strong> If the policy says no, that is the result. An agent that retries its way around a denial does not have a policy, it has a suggestion.</li>
+<li><strong>Measure on your own workload.</strong> A vendor's benchmark was run on a vendor's data. The only numbers that matter are the ones from your traffic and your documents.</li>
+</ul>
+
+<h2>What to ask before you deploy</h2>
+<p>If you remember nothing else, take these six questions into the next agent demo. They map one to one onto the five layers, and a confident, specific answer to each is the real sign that a team has done the work:</p>
+<ul>
+<li>Can you show me the full trace of a real run, including what it cost?</li>
+<li>What is the automated test set, and does it run on every change?</li>
+<li>What stops a runaway loop, and what is the hard cost ceiling per run?</li>
+<li>What exactly is this agent allowed to do, and can it change that itself?</li>
+<li>If one agent calls another, can you show an auditor the authorization chain?</li>
+<li>Which actions can it take that are irreversible, and what specifically guards those?</li>
+</ul>
+
+<h2>What this is really about</h2>
+<p>You do not need a separate, bolted-on "AI safety" product to run agents responsibly. The five layers are the same disciplines that make any critical system trustworthy: see what it does, test it before you trust it, put limits around it, give it an identity, and grant it the least privilege it needs. Applied to a workload that acts on its own and cannot be fully predicted, they stop being nice-to-haves and become the thing that lets you say yes to production.</p>
+<p>The teams that will struggle with agents over the next few years are the ones treating this as a brand-new problem. The teams that will move fast are the ones that recognize it as the newest instance of a very old one, and already know how to do it.</p>
+<hr />
+<p><em>Narendra Loganathan is a distinguished-level engineer and enterprise architect with 25 years building large-scale distributed systems, real-time data platforms, zero-trust security, and more recently agentic AI systems, including enterprise-wide security architecture at Capital One. Through Chakraview Technologies he builds the reliability and governance layer that makes autonomous AI agents safe to run in production. If you are putting agents in front of real data or real customers, <a href="/#book">talk to us about an agent reliability engagement</a>.</em></p>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.35rem;">Chakraview Data &amp; AI</p>
+      <p style="margin-bottom: 0.5rem;">Greater Seattle Area (Sammamish, WA)</p>
+      <p style="margin-bottom: 0.75rem;">
+        <a href="/articles/" style="color: var(--accent-blue);">Articles</a> &bull;
+        <a href="/ai-dev-model/" style="color: var(--accent-blue);">AI Dev Model</a> &bull;
+        <a href="/realtime-data-platform/" style="color: var(--accent-blue);">Real-Time Data Platform</a> &bull;
+        <a href="/fintech-data-mesh/" style="color: var(--accent-blue);">Fintech Data Mesh</a> &bull;
+        <a href="/data-engineering-patterns/" style="color: var(--accent-blue);">Data Engineering Patterns</a> &bull;
+        <a href="https://github.com/naren-chakraview" style="color: var(--accent-blue);">GitHub</a>
+      </p>
+      <p>&copy; 2026 Chakraview Technologies LLC, d/b/a Chakraview Data &amp; AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      securityLevel: 'loose',
+      fontFamily: 'Inter, sans-serif'
+    });
+  </script>
+</body>
+</html>
