@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chakraview Data & AI | Production-Grade Data Engineering & AI Readiness</title>
-  <meta name="description" content="Data Engineering & AI Readiness Consultancy. Turning fragmented data into reliable, contract-governed pipelines and lakehouse foundations." />
+  <title>Chakraview Data &amp; AI | Get Your Data and AI Out of Pilot and Into Production</title>
+  <meta name="description" content="For IT and business leaders at growing companies: we fix the data foundation under your AI, so it runs on real data, safely, at a cost you can predict. Principal-led engineering, with 25 years in distributed systems and data." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -468,166 +468,150 @@
         grid-template-columns: 1fr;
       }
     }
-  </style>
+  
+    .hero-alt { margin-top: 1.25rem; font-size: 0.92rem; color: var(--text-muted); }
+    .hero-alt a { color: var(--accent-blue); }
+    .hero-pains { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin: 0 auto 2.25rem; max-width: 820px; }
+    .hero-pains span { font-size: 0.9rem; color: var(--text-secondary); background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 999px; padding: 0.4rem 0.9rem; }
+    .card-link { display: inline-block; margin-top: 1rem; font-size: 0.88rem; font-weight: 600; color: var(--accent-blue); }
+    .card-link:hover { text-decoration: underline; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .step-num { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; color: var(--accent-emerald); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .principal-facts { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
+    .principal-facts span { font-size: 0.82rem; color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0.3rem 0.7rem; }
+    .proof-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2rem; background: var(--bg-secondary); }
+    .proof-strip p { color: var(--text-secondary); max-width: 720px; }
+    @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
-  <!-- TOP NAVIGATION -->
   <header>
     <div class="container nav-inner">
-      <a href="#" class="brand">
+      <a href="/" class="brand">
         <span class="brand-name">Chakraview Data &amp; AI</span>
         <span class="brand-sub">A Chakraview Technologies LLC Company</span>
       </a>
       <nav class="nav-links">
-        <a href="#problem">The AI Data Gap</a>
-        <a href="#guarantees">Delivery Model</a>
+        <a href="#problems">Problems</a>
+        <a href="#how">How it works</a>
         <a href="#packages">Packages</a>
-        <a href="#architecture">Architecture</a>
-        <a href="/articles/">Articles</a>
-        <a href="/ai-dev-model/">AI Dev Model Docs ↗</a>
-        <a href="/audit.html" class="nav-link-audit" style="color: var(--accent, #38bdf8); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
-          <span>⚡ Take the AI & Data Readiness Audit</span>
-        </a>
-        <a href="#book" class="btn btn-primary">Book a Data Audit</a>
+        <a href="/articles/">Guides</a>
+        <a href="/architecture/">Architecture</a>
+        <a href="/audit.html" style="color: var(--accent-blue); font-weight: 600;">Free scorecard</a>
+        <a href="#book" class="btn btn-primary">Book a review</a>
       </nav>
     </div>
   </header>
 
-  <!-- SECTION 1: HERO -->
-  <section class="hero" style="padding: 4rem 2rem; text-align: center; max-width: 900px; margin: 0 auto;">
-    <h1 style="font-size: 2.75rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; color: #f8fafc;">
-        Reliable, Governed Data and AI Pipelines. Built to Run in Production.
+  <!-- HERO -->
+  <section class="hero" style="padding: 4.5rem 2rem 2rem; text-align: center; max-width: 960px; margin: 0 auto;">
+    <div class="eyebrow mono">For IT and business leaders at growing companies</div>
+    <h1 style="font-size: 2.9rem; font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; color: #f8fafc;">
+      Get your data and AI out of pilot and into production.
     </h1>
-    <p style="font-size: 1.25rem; color: #94a3b8; line-height: 1.6; margin-bottom: 2.5rem;">
-        We turn fragmented data into production-grade pipelines, and make the AI and agents on top of them reliable, governed, and safe to ship. Contract-first ingestion, bad records quarantined automatically, and PII masked before anything reaches a model.
+    <p style="font-size: 1.22rem; color: #94a3b8; line-height: 1.6; margin-bottom: 2rem;">
+      We fix the data foundation underneath your AI, so it runs on your real data, safely, at a cost you can predict. Every engagement is architected and led by a principal engineer with 25 years of building systems that have to be right.
     </p>
-  </section>
-
-  <div class="cta-dual-track" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
-      <!-- Track 1: For SMB Leaders -->
-      <a href="/audit.html" class="track-btn primary" style="background: #38bdf8; color: #0f172a; padding: 0.85rem 1.75rem; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3); transition: transform 0.2s;">
-          <span>🔍 Take the AI &amp; Data Readiness Audit</span>
-      </a>
-
-      <!-- Track 2: For Engineering Leaders / Contract Roles -->
-      <a href="#architecture" class="track-btn secondary" style="background: transparent; color: #f8fafc; border: 1px solid #334155; padding: 0.85rem 1.75rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: border-color 0.2s;">
-          <span>⚙️ Explore Reference Architectures &amp; Delivery Model</span>
-      </a>
-  </div>
-
-  <!--
-  <section class="hero">
-    <div class="container">
-      <div class="eyebrow mono">Data Engineering &amp; AI Readiness Consultancy</div>
-      <h1>
-        Production-Grade Data Engineering &amp; AI Readiness—<span>Turning Fragmented Data into Reliable, Governed Pipelines.</span>
-      </h1>
-      <p class="lead">
-        Most AI initiatives don't fail because of the model—they fail because the underlying data is siloed, untrusted, and ungoverned. We build contract-first data platforms and real-time lakehouse foundations that make moving businesses ready for AI at scale.
-      </p>
-      <div class="hero-ctas">
-        <a href="#packages" class="btn btn-primary">Book an AI Data-Readiness Audit →</a>
-        <a href="#architecture" class="btn btn-secondary">Explore Reference Architectures &amp; Delivery Model</a>
-      </div>
-      <div class="tech-strip mono">
-        <span>CORE STACK:</span>
-        <span class="tech-badge">Data Contracts</span>
-        <span class="tech-badge">Apache Iceberg</span>
-        <span class="tech-badge">Debezium CDC</span>
-        <span class="tech-badge">Apache Kafka &amp; Flink</span>
-        <span class="tech-badge">DuckDB / AWS Athena</span>
-        <span class="tech-badge">Medallion Lakehouse</span>
-        <span class="tech-badge">RAG &amp; AI Context Pipelines</span>
-      </div>
+    <div class="hero-pains">
+      <span>The AI pilot impressed everyone, then stalled</span>
+      <span>Every department has a different number</span>
+      <span>Nobody is sure what the AI can access</span>
+      <span>The cloud bill keeps surprising finance</span>
     </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+      <a href="/audit.html" class="btn btn-primary" style="padding: 0.85rem 1.75rem;">Take the free 2-minute scorecard</a>
+      <a href="#book" class="btn btn-secondary" style="padding: 0.85rem 1.75rem;">Book a 45-minute review</a>
+    </div>
+    <p class="hero-alt">Engineering leader? <a href="/architecture/">See our reference architectures &rarr;</a></p>
   </section>
-  -->
 
-  <!-- SECTION 2: THE AI DATA GAP -->
-  <section id="problem">
+  <!-- PROBLEMS -->
+  <section id="problems">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow mono">The Bottleneck</div>
-        <h2>Why Most AI Initiatives Stall Before Production</h2>
-        <p>Jumping straight from raw operational databases to LLM copilots or automated workflows creates expensive hallucinations and security leaks. Before your models can reason, your data layer must be engineered for trust.</p>
+        <div class="eyebrow mono">Sound familiar?</div>
+        <h2>Why most AI efforts stall before production</h2>
+        <p>The model is rarely the problem. The data underneath it is: scattered across systems, defined differently by every team, and open to more people and tools than anyone intended. AI makes each of those weaknesses expensive.</p>
       </div>
       <div class="grid-2">
         <div class="card">
-          <span class="card-icon icon-danger mono">Risk 01 // Schema Drift</span>
-          <h3>Dirty &amp; Drifting Schemas</h3>
-          <p>Unannounced upstream application changes silently break downstream executive dashboards and corrupt AI retrieval context windows with malformed records.</p>
+          <span class="card-icon icon-danger mono">01 // The stalled pilot</span>
+          <h3>It worked in the demo. It won't scale.</h3>
+          <p>The pilot ran on a hand-cleaned extract and a motivated team. Production runs on live data that arrives late, changes shape without warning and lives in a dozen tools. Six months on, it is still a pilot.</p>
+          <a href="/articles/your-ai-pilot-worked/" class="card-link">Read: Your AI pilot worked. Why won't it scale? &rarr;</a>
         </div>
         <div class="card">
-          <span class="card-icon icon-danger mono">Risk 02 // Data Silos</span>
-          <h3>Fragmented SaaS &amp; Operational Traps</h3>
-          <p>Critical business context is trapped across isolated Postgres databases, payment systems, and CRMs with brittle 24-hour batch reporting lags.</p>
+          <span class="card-icon icon-danger mono">02 // Conflicting numbers</span>
+          <h3>Every department has its own truth.</h3>
+          <p>Sales, finance and support each report a different customer count, and each is right by its own rules. Ask an AI the same question and it picks one silently, with total confidence.</p>
+          <a href="/articles/five-versions-of-the-truth/" class="card-link">Read: Five versions of the truth &rarr;</a>
         </div>
         <div class="card">
-          <span class="card-icon icon-danger mono">Risk 03 // Governance &amp; PII</span>
-          <h3>Ungoverned PII &amp; Compliance Exposure</h3>
-          <p>Feeding raw operational tables into embeddings or LLM prompts without automated Silver/Gold PII masking exposes sensitive customer and financial data.</p>
+          <span class="card-icon icon-danger mono">03 // Access and exposure</span>
+          <h3>Nobody is sure who can see what.</h3>
+          <p>Shared logins, service accounts nobody owns, and AI tools given broad access to make a demo work. Sensitive customer and financial data ends up somewhere it should not, and the security review stops everything.</p>
         </div>
         <div class="card">
-          <span class="card-icon icon-danger mono">Risk 04 // Cloud Spend</span>
-          <h3>Brittle, High-Cost ETL Plumbing</h3>
-          <p>Unmonitored spaghetti scripts and oversized proprietary data warehouses drain engineering hours and inflate monthly cloud compute bills.</p>
+          <span class="card-icon icon-danger mono">04 // Cost and fragility</span>
+          <h3>Scripts that break and bills that grow.</h3>
+          <p>Hand-built scripts and spreadsheets hold the business together, and one person knows how they work. Meanwhile oversized tools and unwatched jobs push the cloud bill up every month.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: CHAKRAVIEW DELIVERY MODEL GUARANTEES -->
-  <section id="guarantees">
-    <div class="container">
-      <div class="section-header">
-        <div class="eyebrow mono">Our Differentiator</div>
-        <h2>Engineered with Discipline: The Chakraview Delivery Model</h2>
-        <p>We don't "vibe-code" data pipelines. Every engagement is governed by our open-source <strong>Human-AI Development Model</strong>, translating top-tier architectural rigor into four ironclad client guarantees.</p>
-      </div>
-      <div class="grid-2">
-        <div class="card">
-          <span class="card-icon icon-guarantee mono">Guarantee 01 // Reliability</span>
-          <h3>Zero Silent Pipeline Failures</h3>
-          <p>Every data source is locked behind explicit schema and semantic data contracts at the ingestion boundary. Malformed records are quarantined automatically before reaching dashboards or AI agents.</p>
-          <span class="pillar-quote mono">Pillar: "Contracts Before Code"</span>
-        </div>
-        <div class="card">
-          <span class="card-icon icon-guarantee mono">Guarantee 02 // Velocity</span>
-          <h3>Rigorous Architecture, Accelerated Delivery</h3>
-          <p>Highest-level architectural design paired with deterministic, agent-accelerated implementation cuts delivery timelines and consulting overhead without sacrificing production rigor.</p>
-          <span class="pillar-quote mono">Pillar: "Humans Define Correctness; Agents Ensure Consistency"</span>
-        </div>
-        <div class="card">
-          <span class="card-icon icon-guarantee mono">Guarantee 03 // Observability</span>
-          <h3>Verified Cost, Latency &amp; Quality Benchmarks</h3>
-          <p>No pipeline is handed over without automated data quality assertions, end-to-end latency SLAs, and cloud-compute cost profiling proven in staging.</p>
-          <span class="pillar-quote mono">Pillar: "Measure Before Claim"</span>
-        </div>
-        <div class="card">
-          <span class="card-icon icon-guarantee mono">Guarantee 04 // Governance</span>
-          <h3>Ironclad Scope &amp; Change Control</h3>
-          <p>Every architectural change enters through a traceable specification gate, eliminating shadow pipelines, unapproved schema mutations, and consulting scope creep.</p>
-          <span class="pillar-quote mono">Pillar: "Intent Enters Through a Defined Gate"</span>
-        </div>
-      </div>
-      <div style="margin-top: 2rem;">
-        <a href="/ai-dev-model/workflow/" class="btn btn-secondary mono">Inspect the Full Chakraview AI Dev Workflow Specification →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3.5: WHO YOU ARE WORKING WITH -->
+  <!-- PRINCIPAL -->
   <section id="principal">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow mono">Who You Are Working With</div>
-        <h2>Top-tier Engineering, Directly</h2>
+        <div class="eyebrow mono">Who leads the work</div>
+        <h2>Senior engineering from the first conversation</h2>
       </div>
-      <div class="card" style="max-width: 820px; margin: 0 auto;">
-        <p>Chakraview is led by a distinguished engineer and architect with 25 years building large-scale data and distributed systems at companies including Capital One, Broadridge, Microsoft, and F5 Networks. As a Distinguished Engineer, our principal built real-time fraud-decisioning platforms, distributed systems and custom databases for Microsoft Azure's software-defined networking, and large-scale, security-sensitive network systems, and set enterprise data and security standards adopted by more than 50 teams. Chakraview publishes open reference architectures for zero-trust, data mesh, and agent governance.</p>
-        <p style="margin-top: 1rem;">You work with that engineer directly. No account layer, no handoff to juniors.</p>
+      <div class="card" style="max-width: 860px; margin: 0 auto;">
+        <p>Chakraview is led by a distinguished engineer and architect with 25 years building large-scale data and distributed systems at companies including Capital One, Broadridge, Microsoft and F5 Networks. That work includes real-time fraud-decisioning platforms, distributed systems and custom databases for Microsoft Azure's software-defined networking, large-scale, security-sensitive network systems, and enterprise data and security standards adopted by more than 50 teams.</p>
+        <p style="margin-top: 1rem;">Every engagement is architected and overseen at that level, from the first review to the handover. There is no account layer between you and the people doing the work.</p>
+        <div class="principal-facts mono">
+          <span>25 years in distributed systems</span>
+          <span>Capital One &middot; Microsoft &middot; Broadridge &middot; F5</span>
+          <span>Standards adopted by 50+ teams</span>
+          <span>Open reference architectures</span>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow mono">How an engagement works</div>
+        <h2>Diagnose, build, then run AI safely</h2>
+        <p>An engagement is built in three stages. You can stop after any of them, and each one leaves you with something you own.</p>
+      </div>
+      <div class="steps">
+        <div class="card">
+          <div class="step-num mono">Step 1 &middot; Diagnose</div>
+          <h3>Know what is in the way</h3>
+          <p>A fixed-scope review of your systems, data and AI plans. You get a readiness scorecard and a phased roadmap that says what to fix first, and what to leave alone.</p>
+          <a href="#packages" class="card-link">AI &amp; Data Readiness Diagnostic &rarr;</a>
+        </div>
+        <div class="card">
+          <div class="step-num mono">Step 2 &middot; Build the foundation</div>
+          <h3>One governed source of data</h3>
+          <p>We build the foundation the roadmap calls for: data that arrives checked, sensitive fields protected, and one place your reports and AI can trust. Then we hand it to your team.</p>
+          <a href="#packages" class="card-link">Lakehouse &amp; AI Pipeline Foundation &rarr;</a>
+        </div>
+        <div class="card">
+          <div class="step-num mono">Step 3 &middot; Run AI safely</div>
+          <h3>AI you can put in production</h3>
+          <p>For AI agents that act on your systems: testing before trust, limits on cost and actions, and governance an auditor can follow. The same disciplines that make any critical system safe.</p>
+          <a href="#packages" class="card-link">Agent Reliability &amp; Governance &rarr;</a>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; color: var(--text-secondary); font-size: 0.95rem;">Need senior hands on an existing platform instead? <a href="#packages" style="color: var(--accent-blue);">Engage a fractional principal engineer</a>.</p>
     </div>
   </section>
 
@@ -636,8 +620,8 @@
     <div class="container">
       <div class="section-header">
         <div class="eyebrow mono">Service Tiers</div>
-        <h2>Transparent Ways to Engage</h2>
-        <p>Whether you need a rapid diagnostic to unblock your AI roadmap, a turnkey modern lakehouse foundation, or top-tier contract execution, we offer structured engagements with zero billing surprises.</p>
+        <h2>Ways to Engage</h2>
+        <p>Start with a fixed-scope diagnostic, build the foundation it recommends, or bring in senior engineering leadership for a critical platform. Every engagement is scoped in writing before it starts.</p>
       </div>
       <div class="grid-3">
         <!-- Tier 1 -->
@@ -645,12 +629,12 @@
           <div>
             <div class="tier-type mono">Tier 01 // Scoped Diagnostic</div>
             <h3>AI &amp; Data Readiness Diagnostic</h3>
-            <p class="tier-best-for">Best for SMBs preparing to deploy AI agents, RAG pipelines, or executive analytics who need a clear architectural blueprint and risk audit.</p>
+            <p class="tier-best-for">Best for companies about to bet on AI or analytics who want to know, before spending more, what is in the way and in what order to fix it.</p>
             <ul class="deliverables-list">
-              <li>Full audit of transactional DBs, SaaS silos &amp; schema health</li>
-              <li>PII exposure &amp; AI data governance risk assessment</li>
-              <li>Comprehensive <strong>SMB Data Readiness Scorecard</strong></li>
-              <li>Phased lakehouse architecture &amp; cloud cost roadmap</li>
+              <li>Audit of your databases, SaaS tools and how reliably their data holds its shape</li>
+              <li>Where sensitive customer and financial data is exposed, and the AI governance risk</li>
+              <li>Your <strong>Data Readiness Scorecard</strong></li>
+              <li>A phased roadmap and cloud cost plan, in the order that pays off soonest</li>
             </ul>
           </div>
           <a href="#book" onclick="selectPackage('Tier 1: AI & Data Readiness Diagnostic')" class="btn btn-secondary" style="width:100%;">Request Diagnostic Scope</a>
@@ -658,16 +642,16 @@
 
         <!-- Tier 2 -->
         <div class="card tier-card featured">
-          <div class="tier-badge mono">Most Popular for SMBs</div>
+          <div class="tier-badge mono">The usual next step</div>
           <div>
             <div class="tier-type mono">Tier 02 // Milestone-Based Project</div>
             <h3>Modern Lakehouse &amp; AI Pipeline Foundation</h3>
-            <p class="tier-best-for">Best for growing businesses ready to replace brittle scripts with a governed, low-ops Medallion Lakehouse that powers analytics and AI.</p>
+            <p class="tier-best-for">Best for growing businesses ready to replace brittle scripts and spreadsheets with one governed, low-maintenance data foundation for analytics and AI.</p>
             <ul class="deliverables-list">
-              <li>Automated CDC or batch ingestion with strict Data Contracts</li>
-              <li>Bronze / Silver / Gold Apache Iceberg Medallion Lakehouse</li>
-              <li>Automated PII redaction &amp; curated AI/RAG context tables</li>
-              <li>Low-ops query layer (DuckDB / Athena) &amp; full team handoff</li>
+              <li>Data pulled from your systems automatically, with checks that stop bad records at the door</li>
+              <li>A layered lakehouse that keeps raw, cleaned and business-ready data separate</li>
+              <li>Sensitive data masked automatically, and curated tables your AI can safely read</li>
+              <li>A low-cost query layer and a full handoff to your team</li>
             </ul>
           </div>
           <a href="#book" onclick="selectPackage('Tier 2: Modern Lakehouse & AI Pipeline Foundation')" class="btn btn-primary" style="width:100%;">Discuss a Foundation Project</a>
@@ -705,102 +689,69 @@
     </div>
   </section>
 
-  <!-- SECTION 5: REFERENCE ARCHITECTURE -->
-  <section id="architecture">
+
+  <!-- HOW WE WORK -->
+  <section id="guarantees">
     <div class="container">
       <div class="section-header">
-        <div class="eyebrow mono">Open-Source Proof</div>
-        <h2>Proven Architecture, Scaled for Enterprise and Right-Sized for SMBs</h2>
-        <p>Explore our production reference platform. We apply the exact same Contract-First Medallion principles across two deployment tracks tailored to your operational footprint.</p>
+        <div class="eyebrow mono">How we work</div>
+        <h2>Four habits behind every engagement</h2>
+        <p>Every engagement follows our open <a href="/ai-dev-model/" style="color: var(--accent-blue);">Human-AI Development Model</a>: senior judgment defines what correct means, and automation keeps the work consistent and fast.</p>
       </div>
-
-      <div class="arch-box">
-        <div class="mono" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.6rem;">REFERENCE PIPELINE TOPOLOGY:</div>
-        <div class="pipeline-flow mono">
-          <span class="node">Operational DBs / SaaS</span>
-          <span class="arrow">→</span>
-          <span class="node">Debezium CDC + Data Contracts</span>
-          <span class="arrow">→</span>
-          <span class="node">Kafka / Event Stream</span>
-          <span class="arrow">→</span>
-          <span class="node">Apache Flink</span>
-          <span class="arrow">→</span>
-          <span class="node">Apache Iceberg (Bronze/Silver/Gold)</span>
-          <span class="arrow">→</span>
-          <span class="node">DuckDB / Athena / AI Context</span>
+      <div class="grid-2">
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">01 // Reliability</span>
+          <h3>Bad data is stopped at the door</h3>
+          <p>Every source is checked against an agreed contract as its data arrives. Records that do not fit are set aside for review, instead of quietly reaching a dashboard or an AI.</p>
         </div>
-
-        <div class="grid-2">
-          <div class="card" style="background: var(--bg-primary);">
-            <span class="card-icon icon-guarantee mono">Track A // SMB Right-Sized Footprint (&lt;$300/mo Cloud Compute)</span>
-            <h3>Serverless Medallion Lakehouse</h3>
-            <p>Don't have a dedicated 10-person DevOps team? We deploy our Contract-First Medallion architecture on object storage using <strong>Apache Iceberg + DuckDB / AWS Athena</strong>. You get enterprise schema enforcement, automated PII masking, and clean AI-ready Gold tables with near-zero infrastructure overhead.</p>
-          </div>
-          <div class="card" style="background: var(--bg-primary);">
-            <span class="card-icon icon-guarantee mono">Track B // Enterprise &amp; High-Scale Contract Track</span>
-            <h3>Real-Time Kappa Streaming Platform</h3>
-            <p>Need sub-second operational pipelines? Full streaming topology featuring <strong>Debezium CDC, Apache Kafka, stateful Apache Flink processing, and ACID-compliant Iceberg tables</strong>, engineered for strict schema evolution, dead-letter quarantining, and high-throughput analytical parity.</p>
-          </div>
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">02 // Speed</span>
+          <h3>Senior design, accelerated delivery</h3>
+          <p>Architecture is designed by a principal engineer, and AI-assisted implementation does the repetitive work under that design. You get senior rigor without paying senior rates for every line.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">03 // Evidence</span>
+          <h3>Measured before it is handed over</h3>
+          <p>Before handover, quality checks, response times and running cost are measured in a test environment, so you know what you are getting before it goes live.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon icon-guarantee mono">04 // Control</span>
+          <h3>Changes go through one door</h3>
+          <p>Every significant change is written down and approved before it is built. No shadow pipelines, no surprise changes to your data, and no quiet growth in scope.</p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div style="margin-top: 2.5rem;">
-        <div class="mono" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">DEEP-DIVE REFERENCE ARCHITECTURES &amp; BLUEPRINTS:</div>
-        <div class="grid-3">
-          <div class="card tier-card">
-            <div>
-              <span class="card-icon icon-guarantee mono">Reference 01 // Contract-First Streaming</span>
-              <h3>Real-Time Data Platform</h3>
-              <p style="margin-bottom: 1.5rem;">Contract-driven Kappa streaming lakehouse (<strong>Debezium CDC → Kafka → Flink → Apache Iceberg → DuckDB</strong>). Demonstrates schema enforcement at ingestion, dead-letter quarantining, and sub-second Gold-layer analytical queries.</p>
-            </div>
-            <a href="/realtime-data-platform/" class="btn btn-secondary mono" style="width: 100%;">Explore Architecture Docs →</a>
-          </div>
+  <!-- GUIDES -->
+  <section id="guides">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow mono">The AI Data Gap</div>
+        <h2>Guides for IT leaders</h2>
+        <p>Plain-language guides to the problems that keep data and AI stuck between a promising pilot and a system you can run.</p>
+      </div>
+      <div class="grid-3">
+        <a href="/articles/five-versions-of-the-truth/" class="card tier-card"><div><span class="card-icon icon-guarantee mono">Guide 03</span><h3>Five Versions of the Truth</h3><p>Why revenue, customer count and churn come out different depending on who you ask.</p></div><span class="card-link">Read the guide &rarr;</span></a>
+        <a href="/articles/your-ai-pilot-worked/" class="card tier-card"><div><span class="card-icon icon-guarantee mono">Guide 02</span><h3>Your AI Pilot Worked. Why Won't It Scale?</h3><p>The five gaps between a promising demo and a system you can run.</p></div><span class="card-link">Read the guide &rarr;</span></a>
+        <a href="/articles/ai-agents-in-production/" class="card tier-card"><div><span class="card-icon icon-guarantee mono">Guide 01</span><h3>AI Agents in Production</h3><p>The five things that separate a slick agent demo from one you can safely run.</p></div><span class="card-link">Read the guide &rarr;</span></a>
+      </div>
+      <div style="margin-top: 2rem;">
+        <a href="/articles/" class="btn btn-secondary">More guides &rarr;</a>
+      </div>
+    </div>
+  </section>
 
-          <div class="card tier-card">
-            <div>
-              <span class="card-icon icon-guarantee mono">Reference 02 // Federated Governance</span>
-              <h3>Fintech Data Mesh &amp; Zero-Copy Lakehouse</h3>
-              <p style="margin-bottom: 1.5rem;">Decentralized domain ownership on Apache Iceberg with federated compliance controls (<strong>PCI-DSS, AML, SOX</strong>), automated PII masking, and cross-domain zero-copy analytics.</p>
-            </div>
-            <a href="/fintech-data-mesh/" class="btn btn-secondary mono" style="width: 100%;">Explore Data Mesh Docs →</a>
-          </div>
-
-          <div class="card tier-card">
-            <div>
-              <span class="card-icon icon-guarantee mono">Reference 03 // 9 Patterns × 22 Variants</span>
-              <h3>Data Engineering Patterns Catalog</h3>
-              <p style="margin-bottom: 1.5rem;">Production-informed reference blueprints and decision matrices covering <strong>9 core data engineering patterns across 22 idiomatic stack variants</strong>, with trade-off criteria for choosing the right architecture.</p>
-            </div>
-            <a href="/data-engineering-patterns/" class="btn btn-secondary mono" style="width: 100%;">Browse Patterns &amp; Matrix →</a>
-          </div>
-
-          <div class="card tier-card">
-            <div>
-              <span class="card-icon icon-guarantee mono">Reference 04 // Agentic Workloads</span>
-              <h3>Distributed Systems for Agentic Workloads</h3>
-              <p style="margin-bottom: 1.5rem;">35+ production patterns for AI agent networks, covering <strong>agent identity, delegation chains, token budgets, failure recovery, and consistency</strong> for autonomous, non-deterministic workloads.</p>
-            </div>
-            <a href="/distributed-systems-patterns/" class="btn btn-secondary mono" style="width: 100%;">Explore Agentic Patterns →</a>
-          </div>
-
-          <div class="card tier-card">
-            <div>
-              <span class="card-icon icon-guarantee mono">Reference 05 // Zero-Trust Security</span>
-              <h3>Zero-Trust Kubernetes Blueprint</h3>
-              <p style="margin-bottom: 1.5rem;">Production-grade zero-trust reference implementation: <strong>workload identity (SPIFFE/SPIRE), mTLS, OPA policy-as-code, and a zero-trust gateway</strong>, extended to govern AI agents as policy-bounded workloads.</p>
-            </div>
-            <a href="/zero-trust-blueprint/" class="btn btn-secondary mono" style="width: 100%;">Explore Zero-Trust Blueprint →</a>
-          </div>
-
-          <div class="card tier-card">
-            <div>
-              <span class="card-icon icon-guarantee mono">Reference 06 // Modernization</span>
-              <h3>Enterprise Modernization</h3>
-              <p style="margin-bottom: 1.5rem;">Phased migration of enterprise monoliths to Kubernetes microservices using <strong>event sourcing, CQRS, sagas, and SLA-as-code</strong>, with contracts defining correctness.</p>
-            </div>
-            <a href="/enterprise-modernization/" class="btn btn-secondary mono" style="width: 100%;">Explore Modernization Docs →</a>
-          </div>
+  <!-- PROOF -->
+  <section id="proof">
+    <div class="container">
+      <div class="proof-strip">
+        <div>
+          <div class="eyebrow mono">Open by default</div>
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem;">We publish our reference architectures</h3>
+          <p>Six open blueprints, from right-sized lakehouses to zero-trust governance for AI agents, show how we build. Your engineers can inspect the approach before you hire us.</p>
         </div>
+        <a href="/architecture/" class="btn btn-secondary">Explore the architecture &rarr;</a>
       </div>
     </div>
   </section>
@@ -811,15 +762,15 @@
       <div class="contact-wrapper">
         <div>
           <div class="eyebrow mono">Start the Conversation</div>
-          <h2 style="font-size: 2.1rem; font-weight: 800; margin-bottom: 1rem;">Ready to Make Your Data AI-Ready?</h2>
+          <h2 style="font-size: 2.1rem; font-weight: 800; margin-bottom: 1rem;">Start with a 45-minute review</h2>
           <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-            Request a 45-minute introductory architecture review with our Chief Architect. No sales fluff, just a direct technical evaluation of your current stack, bottlenecks, and AI goals.
+            Request a 45-minute review with a senior architect. We look at your current systems, what is blocking you, and your AI goals, and you leave with a clear view of the next steps.
           </p>
           <div class="card" style="background: var(--bg-secondary);">
             <div class="mono" style="font-size: 0.82rem; color: var(--accent-blue); margin-bottom: 0.5rem;">WHAT HAPPENS NEXT:</div>
-            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">1. Submit your stack profile using the intake form.</p>
-            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">2. We review your architecture and reply within 1 business day with a calendar link.</p>
-            <p style="font-size: 0.9rem;">3. Walk away from our 45-minute call with clear next steps, whether we engage together or not.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">1. Tell us about your systems and goals in the form.</p>
+            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">2. We reply within one business day with a calendar link.</p>
+            <p style="font-size: 0.9rem;">3. You leave the call with clear next steps, whether or not we work together.</p>
           </div>
         </div>
 
@@ -872,7 +823,8 @@
       <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.35rem;">Chakraview Data &amp; AI</p>
       <p style="margin-bottom: 0.5rem;">Greater Seattle Area</p>
       <p style="margin-bottom: 0.75rem;">
-        <a href="/articles/" style="color: var(--accent-blue);">Articles</a> &bull;
+        <a href="/articles/" style="color: var(--accent-blue);">Guides</a> &bull;
+        <a href="/architecture/" style="color: var(--accent-blue);">Architecture</a> &bull;
         <a href="/ai-dev-model/" style="color: var(--accent-blue);">AI Dev Model</a> &bull;
         <a href="/realtime-data-platform/" style="color: var(--accent-blue);">Real-Time Data Platform</a> &bull;
         <a href="/fintech-data-mesh/" style="color: var(--accent-blue);">Fintech Data Mesh</a> &bull;
