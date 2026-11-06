@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your AI Pilot Worked. Why Won't It Scale? | Chakraview Data &amp; AI</title>
+  <meta name="description" content="The demo ran on a clean extract and a motivated team. Production runs on your real data, your real permissions and nobody&#39;s spare time. Here is what changes, and what good looks like." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #111827;
+      --bg-card: #161f33;
+      --bg-card-hover: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+      --border-highlight: rgba(56, 189, 248, 0.45);
+      --max-w: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.10), transparent 35%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #fff, var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+      color: #090d16;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--accent-blue);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .article-shell {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-blue);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .article-header h1 {
+      font-size: clamp(2rem, 4vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .article-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .article-content {
+      font-size: 1.08rem;
+      color: #e2e8f0;
+      line-height: 1.8;
+    }
+
+    .article-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2.75rem 0 1rem;
+      letter-spacing: -0.015em;
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2rem 0 0.75rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.35rem;
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 0 0 1.5rem 1.5rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.6rem;
+    }
+
+    .article-content strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .article-content em {
+      color: var(--text-secondary);
+    }
+
+    .article-content a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .article-content code {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .article-content pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.75rem 0;
+    }
+
+    .article-content pre code {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 0;
+      font-size: 0.88rem;
+    }
+
+    .article-content hr {
+      border: 0;
+      border-top: 1px solid var(--border-subtle);
+      margin: 2.5rem 0;
+    }
+
+    .mermaid-wrapper {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0 0.75rem;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .mermaid-wrapper pre.mermaid {
+      background: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .article-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-name">Chakraview Data &amp; AI</span>
+        <span class="brand-sub">A Chakraview Technologies LLC Company</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/#problem">The AI Data Gap</a>
+        <a href="/#guarantees">Delivery Model</a>
+        <a href="/#packages">Packages</a>
+        <a href="/#architecture">Architecture</a>
+        <a href="/articles/" class="active" style="color: var(--accent-blue); font-weight: 600;">Articles</a>
+        <a href="/ai-dev-model/">AI Dev Model Docs ↗</a>
+        <a href="/#book" class="btn btn-primary">Book a Data Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <a href="/articles/" class="back-link mono">← All Guides</a>
+    <article>
+      <div class="article-header">
+        <div class="mono" style="font-size: 0.78rem; color: var(--accent-blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem;">The AI Data Gap &middot; Guides for IT Leaders</div>
+        <h1>Your AI Pilot Worked. Why Won't It Scale?</h1>
+        <p class="article-subtitle">The demo ran on a clean extract and a motivated team. Production runs on your real data, your real permissions and nobody's spare time. Here is what changes, and what good looks like.</p>
+        <div class="article-meta mono">
+          <span>By Narendra Loganathan</span>
+          <span>&bull;</span>
+          <span>8 min read</span>
+          <span>&bull;</span>
+          <span>Updated 2026-11-06</span>
+        </div>
+      </div>
+      <div class="article-content">
+<p>It started well. A small team picked a real, annoying problem: matching supplier invoices to purchase orders, or sorting the support queue so the urgent tickets surface first. In eight weeks they had a demo. It was fast, it was mostly right, and it made a very good slide for the board.</p>
+<p>Six months later it is still a pilot. Two of the people who built it have moved on to the next project. Finance has quietly gone back to checking every match by hand, because it got a few badly wrong in March and nobody could explain why. And when someone asks whether it is getting better or worse, the honest answer is that nobody knows.</p>
+<p>If that sounds familiar, you are in good company. A 2026 <a href="https://www.sas.com/en_au/news/press-releases/2026/april/majority-of-smbs-remain-in-early-stages-of-ai-maturity--study-sa.html">IDC study for SAS</a> of more than 1,600 small and midsize business leaders found nearly 70% of them still in the experimental or opportunistic stage of AI. A <a href="https://itbrief.co.uk/story/uk-mid-market-ai-pilots-stall-despite-high-confidence">Klarus survey</a> of 500 mid-market firms in the UK and Ireland found that 73% had deployed AI at least in part, but only 10% had scaled all of their AI initiatives past the pilot, and 83% of those that had piloted AI reported poor data quality. The same survey found something more telling: 48% said a lack of expertise was holding their projects back, while 91% said they were confident in the expertise they had. Both can be true at once. Teams are good at the parts they can see.</p>
+<p>The gap is structural, not a failure of your team. A pilot and a production system are different things that happen to share a demo. Here is what is actually different.</p>
+
+<h2>Five gaps between a pilot and production</h2>
+
+<h3>1. The data gap</h3>
+<p>The pilot ran on an extract: a few months of records, pulled once, and cleaned by hand by someone who knew the quirks. Production runs on the live feed, where records arrive late or twice, a field quietly changes meaning when an upstream system is upgraded, and the customer in your CRM is spelled differently in your billing system. Data that is good enough for a monthly report, where a person glances at the totals, is often not good enough for software that acts on every record.</p>
+
+<h3>2. The ownership gap</h3>
+<p>During the pilot, one small team owned everything. In production there are at least three things to own: the data feeding it, how the AI behaves, and the business result it is supposed to improve. Those usually sit with different people. The data belongs to IT, the behavior to whoever configured it, and the result to a business leader. When the pilot team disbands, each assumes one of the others has it. Often nobody does.</p>
+
+<h3>3. The measurement gap</h3>
+<p>Most pilots are judged by a demo and a gut feel. Nobody wrote down a baseline before it started, and there is no standing set of test cases that runs after every change. That would be a nuisance with ordinary software. With AI it is dangerous, because AI rarely fails loudly. It does not crash. It gives a confident, plausible, wrong answer.</p>
+<p>We saw how quiet this can be in an audit of one of our own reference data platforms. A question an AI agent might reasonably ask came back with "none," and no error at all. Two parts of the platform used different names for the same connection between records, so the answer was simply empty. It looked exactly like good news. Without a test that already knew the right answer, nothing would ever have flagged it.</p>
+
+<h3>4. The access gap</h3>
+<p>Pilots take shortcuts to get to the demo: an administrator login, a bulk export to a laptop, a vendor tool given read access to everything. That is understandable, and it is also why so many pilots stall at the security review. In production the AI should see only what it needs, sensitive customer and financial details should stay out of what it reads, and there should be a record of what it did. Retrofitting that onto a working pilot is often harder than building it in from the start.</p>
+
+<h3>5. The cost gap</h3>
+<p>Pilot costs hide in someone's budget and a few weeks of a team's time. At full volume the bill looks different: usage fees that grow with every record, integration work for each system it touches, cloud compute that nobody is watching, and the people needed to keep an eye on all of it. A pilot that costs a few hundred dollars a month can become a line item that finance starts asking about.</p>
+
+<div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-left: 3px solid var(--accent-blue); border-radius: 10px; padding: 1.4rem 1.6rem; margin: 2rem 0;">
+  <div class="mono" style="font-size: 0.78rem; color: var(--accent-blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem;">Plain-language glossary</div>
+  <p style="margin: 0 0 0.6rem;"><strong>Schema drift.</strong> A source system changes the shape or meaning of its data, often during an upgrade, without telling the systems that depend on it.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Data silo.</strong> Information trapped in one system, such as your CRM or billing tool, that the rest of the business cannot easily combine with anything else.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Baseline.</strong> A measurement of how well the work gets done today, taken before the AI arrives, so you can tell whether it helped.</p>
+  <p style="margin: 0;"><strong>Least privilege.</strong> Giving a person or a system access to exactly what its job needs and nothing more.</p>
+</div>
+
+<h2>Why the obvious fixes don't stick</h2>
+<p>When a pilot stalls, there are four standard responses. Each one treats a real symptom and leaves the cause in place.</p>
+<p><strong>Buy a platform.</strong> A good platform can help, but it inherits your data, your ownership model and your permissions. The gaps move into the new tool along with everything else, and now there is a contract to renew.</p>
+<p><strong>Hire a data scientist.</strong> Most of the distance between a pilot and production is engineering and ownership, not modeling. A brilliant modeler with no production data path and no owner on the business side will build you a better pilot.</p>
+<p><strong>Run another pilot.</strong> Each new pilot proves the idea again, and none of them proves it can run. This is how companies end up with a dozen promising pilots and nothing in production.</p>
+<p><strong>Write a policy.</strong> A governance document matters, but a policy that nothing enforces is a statement of intent. The AI still has the same access it had yesterday.</p>
+
+<h2>What good looks like</h2>
+<p>A pilot that has crossed into production has a recognizable shape. You can check for it without knowing anything about how it was built:</p>
+<ul>
+<li><strong>It runs on the real data path,</strong> not an extract, and bad records are caught on arrival instead of discovered by a user.</li>
+<li><strong>Every part has a named owner:</strong> the data, the behavior and the business result.</li>
+<li><strong>There is a baseline and a standing set of tests,</strong> so better and worse are visible, and a change that makes it worse is caught before it ships.</li>
+<li><strong>Access is least privilege,</strong> sensitive fields are protected before the AI sees them, and every action leaves a record you could show an auditor.</li>
+<li><strong>You know the unit cost,</strong> such as the cost per invoice matched or per ticket triaged, at full volume.</li>
+<li><strong>The decision to scale it or stop it is made on evidence,</strong> on a date that was set in advance.</li>
+</ul>
+
+<div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin: 2rem 0 0.75rem;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 536" role="img" aria-labelledby="gapT gapD" style="width:100%;height:auto;font-family:Inter, 'Segoe UI', system-ui, sans-serif">
+<title id="gapT">The five gaps between a pilot and production</title>
+<desc id="gapD">For each of five gaps, data, ownership, measurement, access and cost, the pilot state on the left and the production state on the right.</desc>
+<defs><marker id="gA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+<text x="30" y="44" font-size="18" font-weight="700" fill="#f59e0b" letter-spacing="1.5">IN THE PILOT</text>
+<text x="970" y="44" font-size="18" font-weight="700" fill="#10b981" letter-spacing="1.5" text-anchor="end">IN PRODUCTION</text>
+<line x1="30" y1="66" x2="970" y2="66" stroke="rgba(148,163,184,0.25)" stroke-width="1"/>
+<rect x="30" y="100" width="340" height="62" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.45)"/>
+<text x="200.0" y="138" font-size="19" fill="#fde68a" text-anchor="middle">Hand-cleaned extract</text>
+<rect x="570" y="100" width="400" height="62" rx="10" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.5)"/>
+<text x="770.0" y="138" font-size="19" fill="#a7f3d0" text-anchor="middle">Live data, bad records caught on arrival</text>
+<line x1="376" y1="131" x2="562" y2="131" stroke="#64748b" stroke-width="1.8" marker-end="url(#gA)"/>
+<rect x="404.0" y="115" width="132" height="32" rx="16" fill="#111827" stroke="rgba(56,189,248,0.5)"/>
+<text x="470.0" y="137" font-size="16" font-weight="700" fill="#38bdf8" text-anchor="middle">Data</text>
+<rect x="30" y="184" width="340" height="62" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.45)"/>
+<text x="200.0" y="222" font-size="19" fill="#fde68a" text-anchor="middle">One team owns everything</text>
+<rect x="570" y="184" width="400" height="62" rx="10" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.5)"/>
+<text x="770.0" y="222" font-size="19" fill="#a7f3d0" text-anchor="middle">Named owners: data, behavior, result</text>
+<line x1="376" y1="215" x2="562" y2="215" stroke="#64748b" stroke-width="1.8" marker-end="url(#gA)"/>
+<rect x="404.0" y="199" width="132" height="32" rx="16" fill="#111827" stroke="rgba(56,189,248,0.5)"/>
+<text x="470.0" y="221" font-size="16" font-weight="700" fill="#38bdf8" text-anchor="middle">Ownership</text>
+<rect x="30" y="268" width="340" height="62" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.45)"/>
+<text x="200.0" y="306" font-size="19" fill="#fde68a" text-anchor="middle">A demo and a gut feel</text>
+<rect x="570" y="268" width="400" height="62" rx="10" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.5)"/>
+<text x="770.0" y="306" font-size="19" fill="#a7f3d0" text-anchor="middle">Baseline and tests on every change</text>
+<line x1="376" y1="299" x2="562" y2="299" stroke="#64748b" stroke-width="1.8" marker-end="url(#gA)"/>
+<rect x="404.0" y="283" width="132" height="32" rx="16" fill="#111827" stroke="rgba(56,189,248,0.5)"/>
+<text x="470.0" y="305" font-size="16" font-weight="700" fill="#38bdf8" text-anchor="middle">Measurement</text>
+<rect x="30" y="352" width="340" height="62" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.45)"/>
+<text x="200.0" y="390" font-size="19" fill="#fde68a" text-anchor="middle">Admin login or bulk export</text>
+<rect x="570" y="352" width="400" height="62" rx="10" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.5)"/>
+<text x="770.0" y="390" font-size="19" fill="#a7f3d0" text-anchor="middle">Least privilege and an audit trail</text>
+<line x1="376" y1="383" x2="562" y2="383" stroke="#64748b" stroke-width="1.8" marker-end="url(#gA)"/>
+<rect x="404.0" y="367" width="132" height="32" rx="16" fill="#111827" stroke="rgba(56,189,248,0.5)"/>
+<text x="470.0" y="389" font-size="16" font-weight="700" fill="#38bdf8" text-anchor="middle">Access</text>
+<rect x="30" y="436" width="340" height="62" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.45)"/>
+<text x="200.0" y="474" font-size="19" fill="#fde68a" text-anchor="middle">Hidden in a team's budget</text>
+<rect x="570" y="436" width="400" height="62" rx="10" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.5)"/>
+<text x="770.0" y="474" font-size="19" fill="#a7f3d0" text-anchor="middle">Known cost per unit of work</text>
+<line x1="376" y1="467" x2="562" y2="467" stroke="#64748b" stroke-width="1.8" marker-end="url(#gA)"/>
+<rect x="404.0" y="451" width="132" height="32" rx="16" fill="#111827" stroke="rgba(56,189,248,0.5)"/>
+<text x="470.0" y="473" font-size="16" font-weight="700" fill="#38bdf8" text-anchor="middle">Cost</text>
+</svg>
+</div>
+<p><em>The same five gaps, before and after. A pilot can live without any of the right-hand column. A production system cannot.</em></p>
+
+<h2>Where it gets hard</h2>
+<p>None of those properties is exotic. The difficulty is in the decisions behind them, and they are judgment calls, not checklists.</p>
+<p><strong>Which pilot goes first.</strong> The most impressive demo is often not the best candidate. A good first one has a clear owner, data that is close to ready, and a result someone will actually measure. Choosing well makes the second and third use cases much cheaper. Choosing badly can sour a company on AI for a year.</p>
+<p><strong>How clean is clean enough.</strong> Waiting for perfect data is its own kind of failure, the one where nothing ever ships. The skill is knowing which flaws a use case can tolerate, which it cannot, and which have to be caught automatically before they reach it.</p>
+<p><strong>Once, or every time.</strong> Each gap can be closed for one use case, or once for the company so that every later use case inherits the fix. The second costs more up front and far less over time. How far to go depends on how many use cases you really have coming.</p>
+<p><strong>How much governance.</strong> A 200-person company does not need a bank's control framework, and it cannot skip governance either. Getting the size right is the difference between controls people follow and controls people route around.</p>
+<p><strong>The order of the work.</strong> Done in the wrong order, the five gaps can freeze a company for six months under the banner of "data readiness." Done in the right order, the first use case reaches production while the foundation for the next one is being laid.</p>
+<p>These are the decisions where experience pays for itself, because the cost of a wrong call usually shows up months later, when it is expensive to undo.</p>
+
+<h2>A self-check for your most promising pilot</h2>
+<p>Take these six questions to the team that built it:</p>
+<ol>
+<li>What data does it run on today, and is that the data it would run on in production?</li>
+<li>Who owns it once the pilot team moves on: the data, the behavior and the result?</li>
+<li>How would you know if it got 10% worse next month?</li>
+<li>What can it access, and could you show an auditor what it did last Tuesday?</li>
+<li>What does one unit of its work cost at full volume?</li>
+<li>What result would make you stop it, and when will you decide?</li>
+</ol>
+<p>If you can answer all six with specifics, your pilot is closer to production than most. If two or more get a shrug, those are your gaps.</p>
+
+<h2>The unglamorous part is the whole job</h2>
+<p>Scaling AI is mostly unglamorous work: closing these five gaps, deliberately, once. Companies that do it for their first use case find that the second and third arrive much faster, because they are building on a foundation instead of starting another pilot. The ones that skip it keep paying for demos.</p>
+<p style="font-size: 0.92rem; color: var(--text-secondary);"><strong>Sources:</strong> IDC for SAS, <a href="https://www.sas.com/en_au/news/press-releases/2026/april/majority-of-smbs-remain-in-early-stages-of-ai-maturity--study-sa.html">"Majority of SMBs remain in early stages of AI maturity"</a> (2026), on the report <em>AI for SMBs: Closing the Readiness-Reality Gap</em>. Klarus survey of mid-market firms, reported in IT Brief UK, <a href="https://itbrief.co.uk/story/uk-mid-market-ai-pilots-stall-despite-high-confidence">"UK mid-market AI pilots stall despite high confidence"</a> (July 2026).</p>
+<hr />
+<p><em>Narendra Loganathan is a distinguished-level engineer and enterprise architect with 25 years building large-scale distributed systems, real-time data platforms, zero-trust security, and more recently agentic AI systems, including enterprise-wide security architecture at Capital One. Through Chakraview Technologies he builds production-grade data foundations and the governance that lets AI run on them safely. If a pilot of yours is stuck between demo and production, our <a href="/#packages">AI &amp; Data Readiness Diagnostic</a> is the place to start: it audits your data sources, schema health and sensitive-data exposure, scores your readiness, and lays out a phased roadmap and cost plan, so you know which gaps to close first and in what order.</em></p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.35rem;">Chakraview Data &amp; AI</p>
+      <p style="margin-bottom: 0.5rem;">Greater Seattle Area</p>
+      <p style="margin-bottom: 0.75rem;">
+        <a href="/articles/" style="color: var(--accent-blue);">Articles</a> &bull;
+        <a href="/ai-dev-model/" style="color: var(--accent-blue);">AI Dev Model</a> &bull;
+        <a href="/realtime-data-platform/" style="color: var(--accent-blue);">Real-Time Data Platform</a> &bull;
+        <a href="/fintech-data-mesh/" style="color: var(--accent-blue);">Fintech Data Mesh</a> &bull;
+        <a href="/data-engineering-patterns/" style="color: var(--accent-blue);">Data Engineering Patterns</a> &bull;
+        <a href="https://github.com/naren-chakraview" style="color: var(--accent-blue);">GitHub</a>
+      </p>
+      <p>&copy; 2026 Chakraview Technologies LLC, d/b/a Chakraview Data &amp; AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
