@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Who Has the Keys? | Chakraview Data &amp; AI</title>
+  <meta name="description" content="Shared logins, accounts nobody owns, a former contractor whose password still works, and now AI tools given access to everything to make a demo work. What access sprawl looks like in a growing company, and what least privilege means when you don&#39;t have a security team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #111827;
+      --bg-card: #161f33;
+      --bg-card-hover: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --border-subtle: rgba(148, 163, 184, 0.14);
+      --border-highlight: rgba(56, 189, 248, 0.45);
+      --max-w: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.10), transparent 35%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    code, pre, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #fff, var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+      color: #090d16;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--accent-blue);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .article-shell {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 5rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-blue);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .article-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .article-header h1 {
+      font-size: clamp(2rem, 4vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .article-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .article-content {
+      font-size: 1.08rem;
+      color: #e2e8f0;
+      line-height: 1.8;
+    }
+
+    .article-content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2.75rem 0 1rem;
+      letter-spacing: -0.015em;
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2rem 0 0.75rem;
+    }
+
+    .article-content p {
+      margin-bottom: 1.35rem;
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 0 0 1.5rem 1.5rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.6rem;
+    }
+
+    .article-content strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .article-content em {
+      color: var(--text-secondary);
+    }
+
+    .article-content a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .article-content code {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .article-content pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.75rem 0;
+    }
+
+    .article-content pre code {
+      background: transparent;
+      color: var(--text-primary);
+      padding: 0;
+      font-size: 0.88rem;
+    }
+
+    .article-content hr {
+      border: 0;
+      border-top: 1px solid var(--border-subtle);
+      margin: 2.5rem 0;
+    }
+
+    .mermaid-wrapper {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0 0.75rem;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .mermaid-wrapper pre.mermaid {
+      background: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .article-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-name">Chakraview Data &amp; AI</span>
+        <span class="brand-sub">A Chakraview Technologies LLC Company</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/#problem">The AI Data Gap</a>
+        <a href="/#guarantees">Delivery Model</a>
+        <a href="/#packages">Packages</a>
+        <a href="/#architecture">Architecture</a>
+        <a href="/articles/" class="active" style="color: var(--accent-blue); font-weight: 600;">Articles</a>
+        <a href="/ai-dev-model/">AI Dev Model Docs ↗</a>
+        <a href="/#book" class="btn btn-primary">Book a Data Audit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <a href="/articles/" class="back-link mono">← All Guides</a>
+    <article>
+      <div class="article-header">
+        <div class="mono" style="font-size: 0.78rem; color: var(--accent-blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem;">The AI Data Gap &middot; Guides for IT Leaders</div>
+        <h1>Who Has the Keys?</h1>
+        <p class="article-subtitle">Shared logins, accounts nobody owns, a former contractor whose password still works, and now AI tools given access to everything to make a demo work. What access sprawl looks like in a growing company, and what least privilege means when you don't have a security team.</p>
+        <div class="article-meta mono">
+          <span>By Narendra Loganathan</span>
+          <span>&bull;</span>
+          <span>8 min read</span>
+          <span>&bull;</span>
+          <span>Updated 2026-11-07</span>
+        </div>
+      </div>
+      <div class="article-content">
+<p>The cyber insurance renewal arrives with a simple-looking question: list every account that can reach your customers' financial data. It takes two weeks to answer, and the finished list holds some surprises. A contractor who left in the spring can still log in to the finance tool. An integration account called "test-sync" has full access to billing. An administrator password lives in a shared spreadsheet. And the AI assistant pilot is connected to the CRM and the shared drive using an administrator's login, "just for the pilot."</p>
+<p>Nobody did anything wrong on purpose. Every one of those keys was handed out for a good reason, usually to get something working by Friday. None of them was ever taken back.</p>
+<p>The pattern is common, and attackers know it. Verizon's 2025 Data Breach Investigations Report found that using stolen credentials was the most common hacking method in breaches at businesses with fewer than 1,000 employees, and that <a href="https://www.verizon.com/business/resources/infographics/2025-dbir-smb-snapshot.pdf">ransomware appeared in 88% of those breaches</a>. AI is adding a new kind of key to the pile. IBM and the Ponemon Institute studied 600 organizations that had a breach in 2024 and early 2025. <a href="https://newsroom.ibm.com/2025-07-30-ibm-report-13-of-organizations-reported-breaches-of-ai-models-or-applications,-97-of-which-reported-lacking-proper-ai-access-controls?asPDF=1">13% of them had an AI model or application breached, and 97% of those had no proper controls on what the AI could access</a>. One in five had a breach involving "shadow AI," meaning AI tools staff used without approval, and the organizations with the most shadow AI paid about $670,000 more per breach.</p>
+
+<h2>Four kinds of keys</h2>
+
+<h3>1. People keys</h3>
+<p>Teams share one login for tools that charge per seat. More people are administrators than anyone intended, because it was quicker than working out the right permission. And people leave while their access stays behind. Offboarding is usually an HR checklist that covers email and the laptop, so access quietly survives in the fifteen SaaS tools nobody wrote down.</p>
+
+<h3>2. Machine keys</h3>
+<p>Service accounts, API keys and integration tokens are the logins that software uses to talk to other software. They get created in an afternoon to make an integration work, often with full access, because narrowing it down would have taken longer. Then they run for years. They never expire, never go on vacation and have no manager. In larger companies they now outnumber people many times over: the security vendor CyberArk's 2025 survey of organizations with 500 or more employees put the ratio at <a href="https://www.businesswire.com/news/home/20250423817886/en/Machine-Identities-Outnumber-Humans-by-More-Than-80-to-1-New-Report-Exposes-the-Exponential-Threats-of-Fragmented-Identity-Security">82 machine identities for every human</a>. A growing company will have fewer than that, but usually still more software logins than employees, and almost nobody can list them all.</p>
+
+<h3>3. Third-party keys</h3>
+<p>Your IT provider, your payroll vendor and the agency that runs your marketing all hold access to your systems. So does every SaaS tool that someone allowed into your Google Drive or Microsoft 365 with a single click. Each one is a door into your data, and someone outside the company holds the key. Verizon found that breaches involving a third party doubled in a year, to 30% of all breaches.</p>
+
+<h3>4. AI keys</h3>
+<p>This is the newest kind, and it grows fastest. To work, an AI tool connected to company data needs a login, and the quickest one to give it is an existing person's, often an administrator's. Meanwhile, staff paste work data into personal AI tools that nobody approved. There is a subtler problem too: when an AI acts using a person's login, the record says the person did it. If something goes wrong, nobody can tell what the AI touched and what the human did. (Our <a href="/articles/ai-agents-in-production/">guide to AI agents in production</a> covers what it takes to give an agent an identity of its own.)</p>
+
+<p>We have seen how easy the gaps are to miss in one of our own reference data platforms. The main data tables masked customer names and email addresses exactly as they should. But the same data could also be reached a second way, through a query service built for a different purpose. That service showed names and emails unmasked, and it let anyone who could reach it change the data. The front door was locked. The side door was open. In most companies, the side doors are where the exposure is.</p>
+
+<div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-left: 3px solid var(--accent-blue); border-radius: 10px; padding: 1.4rem 1.6rem; margin: 2rem 0;">
+  <div class="mono" style="font-size: 0.78rem; color: var(--accent-blue); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.9rem;">Plain-language glossary</div>
+  <p style="margin: 0 0 0.6rem;"><strong>Least privilege.</strong> Giving a person or a system access to exactly what its job needs and nothing more.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>Service account.</strong> A login used by software rather than a person, such as an integration that copies data between two tools.</p>
+  <p style="margin: 0 0 0.6rem;"><strong>API key or token.</strong> A secret string that lets one system act inside another. Whoever holds it can usually do whatever it allows, with no password and no second factor.</p>
+  <p style="margin: 0;"><strong>Shadow AI.</strong> AI tools that staff use on work data without the company knowing or approving.</p>
+</div>
+
+<h2>Why the obvious fixes don't stick</h2>
+<p><strong>Buy single sign-on or a password manager.</strong> Both are worth having, and both cover people. Neither does anything for service accounts, API keys or the integrations between your SaaS tools, which is where much of the access lives.</p>
+<p><strong>Turn on multi-factor authentication everywhere.</strong> Also essential. But software cannot type in a code from a text message, so machine logins do not use it at all, and an attacker holding a stolen token never sees the prompt.</p>
+<p><strong>Run an annual access review in a spreadsheet.</strong> It is out of date the day after it is finished. Managers approve every line, because they cannot tell what most of the entries mean and saying no might break something.</p>
+<p><strong>Lock everything down.</strong> People route around controls that stop them doing their jobs. That is how shared passwords start, and it is how shadow AI starts.</p>
+
+<h2>What good looks like</h2>
+<p>A company that knows who has the keys does not need a large security team. What it has instead is a short list of things you can check for:</p>
+<ul>
+<li><strong>Every key has an owner and a reason,</strong> whether it belongs to a person or a piece of software.</li>
+<li><strong>One place shows who and what can reach your sensitive data,</strong> and it is current, not last year's spreadsheet.</li>
+<li><strong>Leavers lose access the day they leave,</strong> everywhere, without anyone having to remember.</li>
+<li><strong>Software and AI have identities of their own,</strong> separate from people's, limited to their job, and set to expire.</li>
+<li><strong>When an AI acts for a person, the record shows both:</strong> who asked, and what acted.</li>
+<li><strong>Sensitive data is protected wherever it is served,</strong> side doors included.</li>
+<li><strong>You can answer the insurer's question in an hour,</strong> not two weeks.</li>
+</ul>
+
+<div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin: 2rem 0 0.75rem;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="kT kD" style="width:100%;height:auto;font-family:Inter, 'Segoe UI', system-ui, sans-serif">
+<title id="kT">Every door to your customer data</title>
+<desc id="kD">Customer and financial data in the middle. Staff come in through single sign-on, which is owned and recorded. Six other doors have no owner: former staff, shared admin logins, integrations, vendors, AI tools and a side-door query service.</desc>
+<line x1="500.0" y1="116" x2="500" y2="278" stroke="rgba(16,185,129,0.5)" stroke-width="2" stroke-dasharray="0"/>
+<line x1="290" y1="196.0" x2="350" y2="280" stroke="rgba(245,158,11,0.5)" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="290" y1="346.0" x2="350" y2="346.0" stroke="rgba(245,158,11,0.5)" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="290" y1="496.0" x2="350" y2="380" stroke="rgba(245,158,11,0.5)" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="710" y1="196.0" x2="650" y2="280" stroke="rgba(245,158,11,0.5)" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="710" y1="346.0" x2="650" y2="346.0" stroke="rgba(245,158,11,0.5)" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="710" y1="496.0" x2="650" y2="380" stroke="rgba(245,158,11,0.5)" stroke-width="2" stroke-dasharray="6 5"/>
+<rect x="370" y="24" width="260" height="92" rx="12" fill="rgba(16,185,129,0.09)" stroke="rgba(16,185,129,0.55)"/>
+<text x="500.0" y="62" font-size="18" font-weight="700" fill="#a7f3d0" text-anchor="middle">Staff</text>
+<text x="500.0" y="90" font-size="15" fill="#6ee7b7" text-anchor="middle">single sign-on, recorded</text>
+<rect x="30" y="150" width="260" height="92" rx="12" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.5)"/>
+<text x="160.0" y="188" font-size="18" font-weight="700" fill="#fde68a" text-anchor="middle">Former staff</text>
+<text x="160.0" y="216" font-size="15" fill="#fcd34d" text-anchor="middle">access never ended</text>
+<rect x="30" y="300" width="260" height="92" rx="12" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.5)"/>
+<text x="160.0" y="338" font-size="18" font-weight="700" fill="#fde68a" text-anchor="middle">Shared admin login</text>
+<text x="160.0" y="366" font-size="15" fill="#fcd34d" text-anchor="middle">password in a spreadsheet</text>
+<rect x="30" y="450" width="260" height="92" rx="12" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.5)"/>
+<text x="160.0" y="488" font-size="18" font-weight="700" fill="#fde68a" text-anchor="middle">Integrations</text>
+<text x="160.0" y="516" font-size="15" fill="#fcd34d" text-anchor="middle">full access, never expires</text>
+<rect x="710" y="150" width="260" height="92" rx="12" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.5)"/>
+<text x="840.0" y="188" font-size="18" font-weight="700" fill="#fde68a" text-anchor="middle">Vendors and IT provider</text>
+<text x="840.0" y="216" font-size="15" fill="#fcd34d" text-anchor="middle">keys held outside the company</text>
+<rect x="710" y="300" width="260" height="92" rx="12" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.5)"/>
+<text x="840.0" y="338" font-size="18" font-weight="700" fill="#fde68a" text-anchor="middle">AI tools</text>
+<text x="840.0" y="366" font-size="15" fill="#fcd34d" text-anchor="middle">using an administrator&#39;s login</text>
+<rect x="710" y="450" width="260" height="92" rx="12" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.5)"/>
+<text x="840.0" y="488" font-size="18" font-weight="700" fill="#fde68a" text-anchor="middle">Side-door query service</text>
+<text x="840.0" y="516" font-size="15" fill="#fcd34d" text-anchor="middle">customer data unmasked</text>
+<rect x="350" y="278" width="300" height="104" rx="14" fill="#111827" stroke="rgba(56,189,248,0.6)" stroke-width="1.5"/>
+<text x="500" y="322" font-size="20" font-weight="800" fill="#e2e8f0" text-anchor="middle">Customer and</text>
+<text x="500" y="350" font-size="20" font-weight="800" fill="#e2e8f0" text-anchor="middle">financial data</text>
+<text x="500.0" y="582" font-size="14" fill="#94a3b8" text-anchor="middle">Green: owned, scoped and recorded.  Amber: no owner, no end date, or no record.</text>
+</svg>
+</div>
+<p><em>Every door to your customer data. Most companies can name the front door. The exposure is in the doors nobody owns.</em></p>
+
+<h2>Where it gets hard</h2>
+<p>None of that requires exotic technology. The difficulty is in the order and the trade-offs.</p>
+<p><strong>Where to start.</strong> Take a full inventory first, or fix the scariest keys now? Waiting for a complete inventory leaves the worst doors open for months. Skipping it means you never find the keys nobody knew existed. The right answer depends on what is exposed and how badly.</p>
+<p><strong>How tight is tight enough.</strong> Every restriction has a cost in friction. Too little and nothing changes. Too much and people find a workaround, and the workaround is worse than what you started with.</p>
+<p><strong>The account nobody dares touch.</strong> Every company has one: a software login set up before anyone on the current team arrived, which month-end might depend on. Nobody is sure. Changing it safely means finding out what depends on it first, and that is detective work.</p>
+<p><strong>Doors you do not control.</strong> Vendors and SaaS tools hold some of your keys, and you cannot inspect their systems the way you can inspect your own. Knowing what to ask them, and what to do when the answer is vague, is a judgment call.</p>
+<p><strong>AI without the shadows.</strong> Ban AI tools and staff use them anyway, on personal accounts you cannot see. Allow them without limits and your data goes wherever they send it. The workable middle depends on your data, your industry and how your people actually work.</p>
+<p><strong>What "enough" means for you.</strong> A 150-person distributor and a 150-person health clinic need very different levels of control. Your insurer, your customers' contracts and your regulators each set a minimum, and those minimums rarely match.</p>
+<p>These are the calls where experience saves the most, because a wrong call in access control usually stays invisible until the day it becomes an incident.</p>
+
+<h2>A self-check</h2>
+<ol>
+<li>How long would it take to list every account, human or software, that can read your customers' financial data?</li>
+<li>When your last employee or contractor left, when did each of their accesses actually end?</li>
+<li>How many API keys and integration accounts do you have, and who owns each one?</li>
+<li>Which AI tools are connected to company data, and whose access are they using?</li>
+<li>If an AI tool changed a customer record, would your logs show the tool or the person?</li>
+<li>When was your most widely shared password last changed?</li>
+</ol>
+<p>If the first answer is measured in days, that gap is the place to start.</p>
+
+<h2>Keys handed out faster than anyone can track</h2>
+<p>Access sprawl is not a failure of discipline. It is what happens when a growing company hands out keys faster than anyone can keep track of them, and AI has made it faster. The fix is not a lockdown. It is knowing every key, giving each one an owner and an end date, and keeping a record you would be comfortable showing an auditor, an insurer or a customer.</p>
+<p style="font-size: 0.92rem; color: var(--text-secondary);"><strong>Sources:</strong> Verizon, <a href="https://www.verizon.com/business/resources/infographics/2025-dbir-smb-snapshot.pdf"><em>2025 Data Breach Investigations Report: SMB snapshot</em></a>. IBM and the Ponemon Institute, <a href="https://newsroom.ibm.com/2025-07-30-ibm-report-13-of-organizations-reported-breaches-of-ai-models-or-applications,-97-of-which-reported-lacking-proper-ai-access-controls?asPDF=1"><em>Cost of a Data Breach Report 2025</em></a> (press release). CyberArk, <a href="https://www.businesswire.com/news/home/20250423817886/en/Machine-Identities-Outnumber-Humans-by-More-Than-80-to-1-New-Report-Exposes-the-Exponential-Threats-of-Fragmented-Identity-Security"><em>2025 Identity Security Landscape</em></a> (vendor research, organizations with 500+ employees).</p>
+<hr />
+<p><em>Narendra Loganathan is a distinguished-level engineer and enterprise architect with 25 years building large-scale distributed systems, real-time data platforms, zero-trust security, and more recently agentic AI systems, including enterprise-wide security architecture at Capital One. Through Chakraview Technologies he builds production-grade data foundations and the governance that lets AI run on them safely. If you could not answer the insurer's question in an afternoon, our <a href="/#packages">AI &amp; Data Readiness Diagnostic</a> is the place to start: it audits your data sources, shows where sensitive customer and financial data is exposed and how risky your current AI use is, and lays out a phased roadmap. If you are putting AI agents on your systems, our <a href="/#packages">Agent Reliability &amp; Governance</a> engagement gives them identities and limits of their own.</em></p>
+
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="color: var(--text-primary); font-weight: 600; margin-bottom: 0.35rem;">Chakraview Data &amp; AI</p>
+      <p style="margin-bottom: 0.5rem;">Greater Seattle Area</p>
+      <p style="margin-bottom: 0.75rem;">
+        <a href="/articles/" style="color: var(--accent-blue);">Articles</a> &bull;
+        <a href="/ai-dev-model/" style="color: var(--accent-blue);">AI Dev Model</a> &bull;
+        <a href="/realtime-data-platform/" style="color: var(--accent-blue);">Real-Time Data Platform</a> &bull;
+        <a href="/fintech-data-mesh/" style="color: var(--accent-blue);">Fintech Data Mesh</a> &bull;
+        <a href="/data-engineering-patterns/" style="color: var(--accent-blue);">Data Engineering Patterns</a> &bull;
+        <a href="https://github.com/naren-chakraview" style="color: var(--accent-blue);">GitHub</a>
+      </p>
+      <p>&copy; 2026 Chakraview Technologies LLC, d/b/a Chakraview Data &amp; AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
